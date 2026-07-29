@@ -1,0 +1,35 @@
+<Solution>
+  <Folder Name="/01_hello_world/">
+    <Project Path="01_hello_world/Ch01_HelloWorld.csproj" />
+  </Folder>
+  <Folder Name="/02_variables/">
+    <Project Path="02_variables/Ch02_Variables.csproj" />
+  </Folder>
+  <Folder Name="/03_control_flow/">
+    <Project Path="03_control_flow/Ch03_ControlFlow.csproj" />
+  </Folder>
+  <Folder Name="/04_arrays_collections/">
+    <Project Path="04_arrays_collections/Ch04_ArraysCollections.csproj" />
+  </Folder>
+  <Folder Name="/05_methods/">
+    <Project Path="05_methods/Ch05_Methods.csproj" />
+  </Folder>
+  <Folder Name="/06_classes_objects/">
+    <Project Path="06_classes_objects/Ch06_ClassesObjects.csproj" />
+  </Folder>
+  <Folder Name="/07_inheritance/">
+    <Project Path="07_inheritance/Ch07_Inheritance.csproj" />
+  </Folder>
+  <Folder Name="/08_interfaces/">
+    <Project Path="08_interfaces/Ch08_Interfaces.csproj" />
+  </Folder>
+  <Folder Name="/09_exceptions/">
+    <Project Path="09_exceptions/Ch09_Exceptions.csproj" />
+  </Folder>
+  <Folder Name="/10_linq/">
+    <Project Path="10_linq/Ch10_Linq.csproj" />
+  </Folder>
+  <Folder Name="/11_delegates_events/">
+    <Project Path="11_delegates_events/Ch11_DelegatesEvents.csproj" />
+  </Folder>
+</Solution>
