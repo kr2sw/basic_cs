@@ -14,5 +14,11 @@ obj/
 .idea/
 *.sln.iml
 
+# Node.js
+node_modules/
+*.log
+.env
+.env.*
+
 # macOS
 .DS_Store

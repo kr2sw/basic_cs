@@ -1,0 +1,14 @@
+{
+  "name": "09-template-engines",
+  "version": "1.0.0",
+  "description": "EJS 템플릿 엔진 예제",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "ejs": "^3.1.10"
+  }
+}

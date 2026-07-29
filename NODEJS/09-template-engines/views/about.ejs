@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <div class="card">
+      <h2>소개</h2>
+      <p><%= description %></p>
+      <p>이 예제는 다음을 다룹니다:</p>
+      <ul>
+        <li>EJS 템플릿 문법 (<%= %>, <%, forEach 등)</li>
+        <li>Partials (header, footer)</li>
+        <li>데이터 전달 (render의 두 번째 인자)</li>
+      </ul>
+    </div>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

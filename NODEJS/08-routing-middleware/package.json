@@ -1,0 +1,15 @@
+{
+  "name": "08-routing-middleware",
+  "version": "1.0.0",
+  "description": "라우팅과 미들웨어 예제",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "morgan": "^1.10.0",
+    "cors": "^2.8.5"
+  }
+}

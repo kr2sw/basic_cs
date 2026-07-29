@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> - <%= name %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <div class="card">
+      <h2><%= name %>님의 프로필</h2>
+      <p>이 사용자의 상세 정보 페이지입니다.</p>
+      <a href="/">← 목록으로</a>
+    </div>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "03-npm-practice",
+  "version": "1.0.0",
+  "description": "npm 연습 프로젝트",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "hello": "node hello.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "axios": "^1.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
