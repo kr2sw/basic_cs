@@ -32,4 +32,31 @@
   <Folder Name="/11_delegates_events/">
     <Project Path="11_delegates_events/Ch11_DelegatesEvents.csproj" />
   </Folder>
+  <Folder Name="/12_generics/">
+    <Project Path="12_generics/Ch12_generics.csproj" />
+  </Folder>
+  <Folder Name="/13_async_await/">
+    <Project Path="13_async_await/Ch13_async_await.csproj" />
+  </Folder>
+  <Folder Name="/14_strings/">
+    <Project Path="14_strings/Ch14_strings.csproj" />
+  </Folder>
+  <Folder Name="/15_datetime/">
+    <Project Path="15_datetime/Ch15_datetime.csproj" />
+  </Folder>
+  <Folder Name="/16_file_io_streams/">
+    <Project Path="16_file_io_streams/Ch16_file_io_streams.csproj" />
+  </Folder>
+  <Folder Name="/17_serialization/">
+    <Project Path="17_serialization/Ch17_serialization.csproj" />
+  </Folder>
+  <Folder Name="/18_reflection_attributes/">
+    <Project Path="18_reflection_attributes/Ch18_reflection_attributes.csproj" />
+  </Folder>
+  <Folder Name="/19_networking/">
+    <Project Path="19_networking/Ch19_networking.csproj" />
+  </Folder>
+  <Folder Name="/20_unit_testing/">
+    <Project Path="20_unit_testing/Ch20_unit_testing.csproj" />
+  </Folder>
 </Solution>

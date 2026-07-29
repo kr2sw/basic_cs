@@ -17,8 +17,13 @@ obj/
 # Node.js
 node_modules/
 *.log
+
+# .env (except .env.example)
 .env
 .env.*
+
+# Rust
+target/
 
 # macOS
 .DS_Store
