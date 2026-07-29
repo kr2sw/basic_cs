@@ -8,6 +8,7 @@ C#, Node.js, Rust 프로그래밍 언어의 기초부터 고급 개념까지 학
 basic_cs/
 ├── CS/          C# 기초 강의 (20개 챕터)
 ├── NODEJS/      Node.js 기초 강의 (20개 챕터)
+├── PYTHON/      Python 기초 강의 (20개 챕터)
 └── RUST/        Rust 기초 강의 (20개 챕터)
 ```
 
@@ -69,6 +70,35 @@ cd NODEJS/01-introduction && node index.js
 | 18 | Streams | 스트림, pipeline, zlib |
 | 19 | Testing | Jest, supertest |
 | 20 | Deployment | PM2, Docker 배포 |
+
+## Python 기초 (20개 챕터)
+
+```bash
+cd PYTHON/01-hello-world && python main.py
+```
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 01 | Hello World | print(), input(), f-strings, 자료형 |
+| 02 | Variables | 변수, 동적 타이핑, None, 다중 할당 |
+| 03 | Control Flow | if/elif/else, for/while, range(), break/continue |
+| 04 | Lists & Tuples | 리스트, 튜플, 인덱싱, 슬라이싱, 메서드 |
+| 05 | Dicts & Sets | 딕셔너리, 세트, 집합 연산 |
+| 06 | Functions | def, return, *args/**kwargs, lambda, docstring |
+| 07 | Strings | 문자열 메서드, 포맷팅, 슬라이싱 |
+| 08 | File I/O | open/with, read/write, pathlib |
+| 09 | Exceptions | try/except/else/finally, raise, 사용자 정의 예외 |
+| 10 | Modules & Packages | import, pip, __name__, os/sys |
+| 11 | OOP | class, __init__, self, classmethod, staticmethod |
+| 12 | Inheritance | super(), 다중 상속, MRO, isinstance |
+| 13 | Decorators | @decorator, functools.wraps, @property |
+| 14 | Iterators & Generators | __iter__/__next__, yield, itertools |
+| 15 | Comprehensions | list/dict/set 컴프리헨션, 조건부 컴프리헨션 |
+| 16 | Lambda & Map/Filter | lambda, map(), filter(), reduce(), sorted() |
+| 17 | DateTime | datetime, date, timedelta, strftime |
+| 18 | JSON & APIs | json 모듈, urllib.request, GET/POST |
+| 19 | venv & pip | 가상환경, requirements.txt, pip |
+| 20 | Testing | unittest, pytest, assert, mock |
 
 ## Rust 기초 (20개 챕터)
 
