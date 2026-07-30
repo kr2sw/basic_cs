@@ -1,6 +1,6 @@
 # Basic CS - 프로그래밍 기초 강의 자료
 
-C, C#, Java, Node.js, PHP, Python, React, Rust, Vue.js 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
+Arduino, C, C#, Java, Node.js, PHP, Python, React, Rust, Vue.js 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
 ## 구조
 
@@ -12,6 +12,7 @@ basic_cs/
 ├── NODEJS/      Node.js 기초 강의 (20개 챕터)
 ├── PHP/         PHP 기초 강의 (20개 챕터)
 ├── PYTHON/      Python 기초 강의 (20개 챕터)
+├── ARDUINO/     Arduino 기초 강의 (20개 챕터)
 ├── REACT/       React 기초 강의 (20개 챕터)
 ├── RUST/        Rust 기초 강의 (20개 챕터)
 └── VUE/         Vue.js 기초 강의 (20개 챕터)
@@ -249,6 +250,35 @@ cd RUST/01-hello-world && cargo run
 | 18 | Macros | 선언적 매크로 (macro_rules!), 속성 매크로 |
 | 19 | Testing | 단위 테스트, 통합 테스트, doc 테스트 |
 | 20 | Web Server | 간단한 HTTP 서버 (TcpListener) |
+
+## Arduino 기초 (20개 챕터)
+
+```bash
+# Arduino IDE에서 .ino 파일 열어서 업로드
+```
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 01 | Introduction | Arduino IDE, setup/loop, LED blink |
+| 02 | Digital I/O | digitalRead, 버튼 입력, 풀업 저항 |
+| 03 | Analog Input | analogRead, 가변저항, map() |
+| 04 | PWM | analogWrite, LED fade, PWM 핀 |
+| 05 | Serial | Serial.begin, Serial.print/read |
+| 06 | Conditional | if/else, 디바운싱, 상태 변화 감지 |
+| 07 | Loops | for/while, LED 패턴, Knight Rider |
+| 08 | Functions | 함수 정의, 파라미터, 리턴값 |
+| 09 | Arrays | 핀 배열, LED 시퀀스, 패턴 제어 |
+| 10 | LCD Display | I2C LCD, 문자 출력, LiquidCrystal |
+| 11 | Servo | Servo 라이브러리, sweep, 위치 제어 |
+| 12 | Ultrasonic | HC-SR04, pulseIn, 거리 측정 |
+| 13 | DHT Sensor | DHT11 온습도 센서 |
+| 14 | IR Remote | IR 리모컨 수신, 코드 매핑 |
+| 15 | DC Motor | L298N, 모터 속도/방향 제어 |
+| 16 | Interrupts | attachInterrupt, ISR, volatile |
+| 17 | EEPROM | EEPROM 읽기/쓰기, 구조체 저장 |
+| 18 | Timers | millis(), Blink Without Delay |
+| 19 | I2C | Wire 라이브러리, Master/Slave |
+| 20 | IoT (ESP) | ESP8266 WiFi, HTTP 요청 |
 
 ## Vue.js 기초 (20개 챕터)
 
