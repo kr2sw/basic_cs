@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Emscripten C++ → WASM (Embind)</title>
+</head>
+<body>
+  <h1>C++ → WASM (Embind)</h1>
+  <pre id="output"></pre>
+
+  <script>
+    Module = {
+      onRuntimeInitialized: function() {
+        const log = document.getElementById('output');
+        const calc = new Module.Calculator();
+
+        log.textContent += `add(10, 20) = ${calc.add(10, 20)}\n`;
+        log.textContent += `multiply(6, 7) = ${calc.multiply(6, 7)}\n`;
+        log.textContent += `greet("WASM") = ${calc.greet("WASM")}\n`;
+
+        calc.store(42);
+        log.textContent += `recall() = ${calc.recall()}\n`;
+
+        const vec = new Module.vectorInt();
+        vec.push_back(10);
+        vec.push_back(20);
+        vec.push_back(30);
+        log.textContent += `sumVector([10,20,30]) = ${calc.sumVector(vec)}\n`;
+
+        vec.delete();
+        calc.delete();
+      },
+      print: function(text) {
+        document.getElementById('output').textContent += `[C++] ${text}\n`;
+      }
+    };
+  </script>
+  <script src="hello.js"></script>
+</body>
+</html>

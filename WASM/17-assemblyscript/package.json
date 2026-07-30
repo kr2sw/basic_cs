@@ -1,0 +1,11 @@
+{
+  "name": "wasm-assemblyscript",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npx asc assembly/index.ts -o build/optimized.wasm --optimize --exportRuntime",
+    "dev": "npx asc assembly/index.ts -o build/optimized.wasm --optimize --exportRuntime --sourceMap"
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.27.0"
+  }
+}

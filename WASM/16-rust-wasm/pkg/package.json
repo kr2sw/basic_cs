@@ -1,0 +1,7 @@
+{
+  "name": "wasm-game",
+  "version": "0.1.0",
+  "description": "Rust + WASM example",
+  "main": "wasm_game.js",
+  "types": "wasm_game.d.ts"
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 이미지 필터</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    .container { display: flex; gap: 20px; }
+    canvas { border: 1px solid #ccc; max-width: 400px; max-height: 400px; }
+    .controls { margin: 20px 0; }
+    button { margin-right: 8px; padding: 8px 16px; cursor: pointer; }
+    input[type="file"] { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>WASM 이미지 필터</h1>
+  <input type="file" id="fileInput" accept="image/*">
+  <div class="controls">
+    <button onclick="applyFilter('grayscale')">그레이스케일</button>
+    <button onclick="applyFilter('brightness')">밝게</button>
+    <button onclick="applyFilter('invert')">반전</button>
+    <button onclick="applyFilter('threshold')">이진화</button>
+    <button onclick="resetImage()">원본</button>
+  </div>
+  <div class="container">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let originalData = null;
+    let filterModule = null;
+
+    // WASM 로드
+    async function initWasm() {
+      const response = await fetch('filter.wasm');
+      const bytes = await response.arrayBuffer();
+      const { instance } = await WebAssembly.instantiate(bytes);
+      filterModule = instance.exports;
+    }
+
+    document.getElementById('fileInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const img = new Image();
+      img.onload = () => {
+        canvas.width = Math.min(img.width, 400);
+        canvas.height = Math.min(img.height, 400);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        originalData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      };
+      img.src = URL.createObjectURL(file);
+    });
+
+    function applyFilter(type) {
+      if (!filterModule || !originalData) return;
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const { data, width, height } = imageData;
+      const pixelCount = width * height;
+
+      // WASM 메모리에 픽셀 데이터 복사
+      const wasmMemory = filterModule.memory;
+      const ptr = 0;
+      const wasmView = new Uint8Array(wasmMemory.buffer);
+      wasmView.set(data, ptr);
+
+      switch (type) {
+        case 'grayscale':
+          filterModule.grayscale(ptr, pixelCount);
+          break;
+        case 'brightness':
+          filterModule.brightness(ptr, pixelCount, 50);
+          break;
+        case 'invert':
+          filterModule.invert(ptr, pixelCount);
+          break;
+        case 'threshold':
+          filterModule.threshold(ptr, pixelCount, 128);
+          break;
+      }
+
+      // 결과를 canvas로 복사
+      data.set(wasmView.subarray(ptr, ptr + data.length));
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    function resetImage() {
+      if (!originalData) return;
+      ctx.putImageData(originalData, 0, 0);
+    }
+
+    initWasm().catch(console.error);
+  </script>
+</body>
+</html>

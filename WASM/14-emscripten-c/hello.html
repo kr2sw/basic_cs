@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Emscripten C → WASM</title>
+</head>
+<body>
+  <h1>C → WebAssembly (Emscripten)</h1>
+  <pre id="output"></pre>
+
+  <script>
+    // Emscripten 모듈 로드
+    Module = {
+      onRuntimeInitialized: function() {
+        const log = document.getElementById('output');
+        log.textContent += `Module 로드 완료\n`;
+        log.textContent += `add(30, 12) = ${Module._add(30, 12)}\n`;
+        log.textContent += `factorial(10) = ${Module._factorial(10)}\n`;
+        log.textContent += `fibonacci(15) = ${Module._fibonacci(15)}\n`;
+      },
+      print: function(text) {
+        document.getElementById('output').textContent += `[C] ${text}\n`;
+      }
+    };
+  </script>
+  <script src="hello.js"></script>
+</body>
+</html>

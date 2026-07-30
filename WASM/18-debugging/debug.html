@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 디버깅</title>
+</head>
+<body>
+  <h1>WASM 디버깅 예제</h1>
+  <pre id="output"></pre>
+
+  <script>
+    async function run() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('debug.wasm'));
+      const { buggy_factorial, fixed_factorial, add_trace } = instance.exports;
+      const log = document.getElementById('output');
+
+      log.textContent += '--- 잘못된 factorial (버그 발견) ---\n';
+      for (let i = 1; i <= 5; i++) {
+        log.textContent += `buggy_factorial(${i}) = ${buggy_factorial(i)}\n`;
+      }
+
+      log.textContent += '\n--- 수정된 factorial ---\n';
+      for (let i = 1; i <= 5; i++) {
+        log.textContent += `fixed_factorial(${i}) = ${fixed_factorial(i)}\n`;
+      }
+
+      log.textContent += '\n--- add_trace (스택 상태) ---\n';
+      const [a, b, sum] = add_trace(10, 20);
+      log.textContent += `a=${a}, b=${b}, sum=${sum}\n`;
+
+      log.textContent += '\n💡 DevTools Sources 패널에서 debug.wasm을 열고\n';
+      log.textContent += '    브레이크포인트를 설정하여 단계별 실행을 확인하세요.\n';
+    }
+    run().catch(console.error);
+  </script>
+</body>
+</html>

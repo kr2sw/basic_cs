@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM → JS 호출</title>
+</head>
+<body>
+  <h1>WASM에서 JS 함수 호출하기</h1>
+  <pre id="output"></pre>
+
+  <script>
+    let counter = 0;
+
+    const importObject = {
+      js: {
+        print: (value) => {
+          document.getElementById('output').textContent += `[WASM → JS] print(${value})\n`;
+        },
+        double_and_print: (value) => {
+          const result = value * 2;
+          document.getElementById('output').textContent +=
+            `[WASM → JS] ${value} * 2 = ${result}\n`;
+          return result;
+        },
+        get_value: () => 42,
+        generate_id: () => ++counter,
+      }
+    };
+
+    WebAssembly.instantiateStreaming(fetch('call-js.wasm'), importObject)
+      .then(({ instance }) => {
+        const { call_js, get_and_process, generate_ids } = instance.exports;
+        const log = document.getElementById('output');
+
+        log.textContent += `call_js(21) = ${call_js(21)}\n\n`;
+        log.textContent += `get_and_process() = ${get_and_process()}\n\n`;
+        log.textContent += `generate_ids(5) = ${generate_ids(5)}\n`;
+      })
+      .catch(console.error);
+  </script>
+</body>
+</html>

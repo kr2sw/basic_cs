@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 메모리</title>
+</head>
+<body>
+  <h1>WASM 선형 메모리</h1>
+  <pre id="output"></pre>
+
+  <script>
+    async function run() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('memory.wasm'));
+      const { memory, write_int, read_int, read_string, get_memory_size } = instance.exports;
+      const log = document.getElementById('output');
+
+      // 정수 쓰기/읽기
+      write_int(256, 12345);
+      log.textContent += `read_int(256) = ${read_int(256)}\n`;
+
+      // 문자열 읽기
+      const bytes = new Uint8Array(memory.buffer, 0, 28);
+      const decoder = new TextDecoder('utf-8');
+      log.textContent += `문자열: ${decoder.decode(bytes)}\n`;
+
+      // 메모리에 직접 쓰기
+      const view = new Int32Array(memory.buffer);
+      view[100] = 999;
+      log.textContent += `read_int(400) = ${read_int(400)}\n`;  // 100 * 4 = 400
+
+      // 메모리 크기
+      log.textContent += `메모리 페이지 수: ${get_memory_size()}\n`;
+    }
+    run().catch(console.error);
+  </script>
+</body>
+</html>

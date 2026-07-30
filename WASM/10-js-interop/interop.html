@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>JS ↔ WASM Interop</title>
+</head>
+<body>
+  <h1>JS ↔ WASM 상호 운용</h1>
+  <pre id="output"></pre>
+
+  <script>
+    async function run() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('interop.wasm'));
+      const { memory, get_string, sum_array, write_memory, read_memory } = instance.exports;
+      const log = document.getElementById('output');
+
+      // 1. 문자열 읽기
+      const bytes = new Uint8Array(memory.buffer, get_string(), 16);
+      const str = new TextDecoder().decode(bytes);
+      log.textContent += `WASM 문자열: "${str}"\n`;
+
+      // 2. JS에서 메모리에 배열 쓰고 WASM에서 합계 계산
+      const array = new Int32Array(memory.buffer);
+      array[0] = 10; array[1] = 20; array[2] = 30; array[3] = 40;
+      const sum = sum_array(0, 4);
+      log.textContent += `배열 [10, 20, 30, 40] 합계 = ${sum}\n`;
+
+      // 3. WASM 메모리에 쓰고 다시 읽기
+      write_memory(100, 777);
+      log.textContent += `read_memory(100) = ${read_memory(100)}\n`;
+
+      // 4. ArrayBuffer 공유
+      const view = new Int32Array(memory.buffer, 100, 1);
+      log.textContent += `JS에서 본 memory[100] = ${view[0]}\n`;
+
+      // 5. 한글 문자열 테스트
+      const encoder = new TextEncoder();
+      const korean = encoder.encode('안녕 WASM!');
+      new Uint8Array(memory.buffer).set(korean, 200);
+      const readBytes = new Uint8Array(memory.buffer, 200, korean.length);
+      log.textContent += `직접 쓴 문자열: "${new TextDecoder().decode(readBytes)}"\n`;
+    }
+    run().catch(console.error);
+  </script>
+</body>
+</html>

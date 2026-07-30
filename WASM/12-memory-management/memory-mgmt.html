@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 메모리 관리</title>
+</head>
+<body>
+  <h1>WASM 메모리 관리</h1>
+  <pre id="output"></pre>
+
+  <script>
+    async function run() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('memory-mgmt.wasm'));
+      const { memory, get_pages, grow_memory, memcpy, memset, get_hello_addr, get_world_addr } = instance.exports;
+      const log = document.getElementById('output');
+      const decoder = new TextDecoder();
+
+      // 초기 메모리
+      log.textContent += `초기 페이지: ${get_pages()}\n`;
+
+      // Hello 읽기
+      const hello = new Uint8Array(memory.buffer, 0, 5);
+      log.textContent += `Hello: "${decoder.decode(hello)}"\n`;
+
+      // World 읽기
+      const world = new Uint8Array(memory.buffer, 16, 6);
+      log.textContent += `World: "${decoder.decode(world)}"\n`;
+
+      // 메모리 확장
+      const result = grow_memory(1);
+      log.textContent += `grow_memory(1) = ${result} (이전 페이지 수)\n`;
+      log.textContent += `확장 후 페이지: ${get_pages()}\n`;
+
+      // 메모리 복사 (Hello를 64로 복사)
+      memcpy(64, 0, 5);
+      const copied = new Uint8Array(memory.buffer, 64, 5);
+      log.textContent += `복사된 문자열: "${decoder.decode(copied)}"\n`;
+
+      // 메모리 채우기
+      memset(128, 65, 10);  // A(65)로 10바이트 채우기
+      const filled = new Uint8Array(memory.buffer, 128, 10);
+      log.textContent += `채워진 메모리: "${decoder.decode(filled)}"\n`;
+    }
+    run().catch(console.error);
+  </script>
+</body>
+</html>

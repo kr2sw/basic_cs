@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM Import/Export</title>
+</head>
+<body>
+  <h1>WASM Import/Export</h1>
+  <pre id="output"></pre>
+
+  <script>
+    const memory = new WebAssembly.Memory({ initial: 1 });
+
+    const importObject = {
+      env: {
+        log: (value) => {
+          document.getElementById('output').textContent += `[JS log] ${value}\n`;
+        },
+        memory: memory,
+      }
+    };
+
+    WebAssembly.instantiateStreaming(fetch('import-export.wasm'), importObject)
+      .then(({ instance }) => {
+        const { add_one, mul, process, version } = instance.exports;
+        const log = document.getElementById('output');
+
+        log.textContent += `add_one(41) = ${add_one(41)}\n`;
+        log.textContent += `mul(6, 7) = ${mul(6, 7)}\n`;
+        log.textContent += `version = ${version.value}\n`;
+        log.textContent += `process(42) = ${process(42)}\n`;
+      })
+      .catch(console.error);
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>AssemblyScript WASM</title>
+</head>
+<body>
+  <h1>AssemblyScript → WebAssembly</h1>
+  <pre id="output"></pre>
+
+  <script>
+    async function run() {
+      const wasm = await WebAssembly.instantiateStreaming(fetch('build/optimized.wasm'), {
+        env: { abort: () => console.error('abort') }
+      });
+      const { add, factorial, fibonacci, isPrime, greet } = wasm.instance.exports;
+      const log = document.getElementById('output');
+
+      log.textContent += `add(30, 12) = ${add(30, 12)}\n`;
+      log.textContent += `factorial(10) = ${factorial(10)}\n`;
+      log.textContent += `fibonacci(15) = ${fibonacci(15)}\n`;
+      log.textContent += `isPrime(17) = ${isPrime(17)}\n`;
+      log.textContent += `isPrime(20) = ${isPrime(20)}\n`;
+    }
+    run().catch(console.error);
+  </script>
+</body>
+</html>
