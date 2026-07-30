@@ -1,16 +1,48 @@
 # Basic CS - 프로그래밍 기초 강의 자료
 
-C#, Node.js, Rust 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
+C, C#, Java, Node.js, PHP, Python, Rust 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
 ## 구조
 
 ```
 basic_cs/
+├── C/           C 기초 강의 (20개 챕터)
 ├── CS/          C# 기초 강의 (20개 챕터)
+├── JAVA/        Java 기초 강의 (20개 챕터)
 ├── NODEJS/      Node.js 기초 강의 (20개 챕터)
+├── PHP/         PHP 기초 강의 (20개 챕터)
 ├── PYTHON/      Python 기초 강의 (20개 챕터)
 └── RUST/        Rust 기초 강의 (20개 챕터)
 ```
+
+## C 기초 (20개 챕터)
+
+```bash
+cd C/01-hello-world && gcc main.c -o main && ./main
+```
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 01 | Hello World | 기본 출력, printf/scanf, 주석, 컴파일 과정 |
+| 02 | Variables | 변수, 기본 자료형, 형변환, 상수, sizeof |
+| 03 | Control Flow | if/else, switch, for/while/do-while, break/continue |
+| 04 | Arrays | 1차원/2차원 배열, VLA, 배열과 포인터 |
+| 05 | Functions | 함수 정의, 프로토타입, 재귀, static 변수 |
+| 06 | Pointers | 포인터 기초, 역참조, 포인터 연산, Call by reference |
+| 07 | Strings | 문자 배열, string.h 함수, strtok, sprintf |
+| 08 | Structs | 구조체, typedef, 중첩 구조체, 구조체 배열 |
+| 09 | File I/O | fopen/fclose, fprintf/fscanf, fread/fwrite |
+| 10 | Dynamic Memory | malloc/calloc/realloc/free, 메모리 관리 |
+| 11 | Preprocessor | #define, #include, 매크로, 조건부 컴파일 |
+| 12 | Multi-file | 헤더 파일, extern, static, 분할 컴파일 |
+| 13 | Bit Manipulation | 비트 연산자, 비트 플래그, 시프트, 마스킹 |
+| 14 | Recursion | 재귀 함수, 팩토리얼, 피보나치, 하노이 탑 |
+| 15 | Linked List | 단일 연결 리스트, 삽입/삭제/탐색/역순 |
+| 16 | Stack & Queue | 스택, 큐 (배열/연결 리스트 기반) |
+| 17 | Sorting | 버블/선택/삽입/퀵/병합 정렬, 성능 비교 |
+| 18 | Search | 선형 탐색, 이진 탐색 (재귀/반복) |
+| 19 | Advanced Pointers | 이중 포인터, 함수 포인터, void 포인터, const |
+| 20 | OOP Simulation | 구조체 + 함수 포인터로 OOP 흉내내기 |
 
 ## C# 기초 (20개 챕터)
 
@@ -41,6 +73,64 @@ dotnet run --project CS/01_hello_world
 | 18 | Reflection & Attributes | 리플렉션, 커스텀 어트리뷰트 |
 | 19 | Networking | HttpClient, TCP 클라이언트/서버 |
 | 20 | Unit Testing | 단위 테스트 (Calculator 예제) |
+
+## Java 기초 (20개 챕터)
+
+```bash
+cd JAVA/01-hello-world && javac Main.java && java Main
+```
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 01 | Hello World | 기본 입출력, 첫 Java 프로그램, 주석 |
+| 02 | Variables | 변수, 기본형/참조형, 형변환, 상수 |
+| 03 | Control Flow | 조건문 (if/else, switch), 반복문 (for, while, do-while) |
+| 04 | Arrays | 배열, 다차원 배열, Arrays 클래스 |
+| 05 | Methods | 메서드 정의, 오버로딩, 가변인자, 재귀 |
+| 06 | OOP | 클래스, 객체, 생성자, this, 접근 제어자 |
+| 07 | Inheritance | 상속, super, 오버라이딩, Object 클래스 |
+| 08 | Interface & Abstract | 인터페이스, 추상 클래스, 다형성 |
+| 09 | Packages | 패키지, import, import static, classpath |
+| 10 | Exceptions | 예외 처리, try-catch-finally, 사용자 정의 예외 |
+| 11 | Wrapper & String | Wrapper 클래스, String, StringBuilder |
+| 12 | Collections | List, Set, Map, Iterator, Comparable |
+| 13 | Generics | 제네릭 클래스/메서드, 와일드카드 |
+| 14 | Lambda & Stream | 람다 표현식, Stream API, Optional |
+| 15 | I/O | File, Byte/Char Stream, NIO |
+| 16 | Threads | Thread, Runnable, ExecutorService, 동기화 |
+| 17 | JDBC | JDBC, Connection, PreparedStatement, 트랜잭션 |
+| 18 | Networking | Socket, ServerSocket, InetAddress, URL |
+| 19 | Date & Time | LocalDate, LocalTime, DateTimeFormatter |
+| 20 | Testing & Annotations | JUnit, 커스텀 어노테이션, Reflection |
+
+## PHP 기초 (20개 챕터)
+
+```bash
+cd PHP/01-hello-world && php index.php
+```
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 01 | Hello World | 기본 출력, 변수, 주석, PHP 기본 문법 |
+| 02 | Variables | 변수, 데이터 타입, 형변환, 상수, null |
+| 03 | Control Flow | if/else, switch, for/while/foreach, match |
+| 04 | Arrays | 인덱스 배열, 연관 배열, 다차원 배열, 배열 함수 |
+| 05 | Functions | 함수 정의, 파라미터, return, 가변인자, 화살표 함수 |
+| 06 | Strings | 문자열 함수, 포맷팅, 정규표현식, heredoc |
+| 07 | OOP | 클래스, 객체, 생성자, 접근 제어자, static |
+| 08 | Inheritance | 상속, parent, 오버라이딩, final |
+| 09 | Interface & Abstract | 인터페이스, 추상 클래스, trait |
+| 10 | Superglobals | $_GET, $_POST, $_SESSION, $_COOKIE, $_SERVER |
+| 11 | Forms & Validation | 폼 처리, 필터링, 유효성 검사 |
+| 12 | File Handling | 파일 읽기/쓰기, 디렉토리, glob |
+| 13 | Error Handling | 예외 처리, try-catch, 사용자 정의 예외 |
+| 14 | Sessions & Cookies | 세션 관리, 쿠키 설정/읽기/삭제 |
+| 15 | Database (PDO) | PDO 연결, prepared statements, CRUD |
+| 16 | JSON & APIs | json_encode/decode, cURL, REST API |
+| 17 | Date & Time | date(), DateTime, DateInterval, 시간대 |
+| 18 | File Upload | 파일 업로드, MIME 검사, 보안 |
+| 19 | Namespaces | 네임스페이스, use, autoload, Composer |
+| 20 | MVC Pattern | MVC 패턴, 라우팅, 컨트롤러, 뷰 |
 
 ## Node.js 기초 (20개 챕터)
 
