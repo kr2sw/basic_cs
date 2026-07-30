@@ -12,7 +12,8 @@ basic_cs/
 ├── NODEJS/      Node.js 기초 강의 (20개 챕터)
 ├── PHP/         PHP 기초 강의 (20개 챕터)
 ├── PYTHON/      Python 기초 강의 (20개 챕터)
-└── RUST/        Rust 기초 강의 (20개 챕터)
+├── RUST/        Rust 기초 강의 (20개 챕터)
+└── VUE/         Vue.js 기초 강의 (20개 챕터)
 ```
 
 ## C 기초 (20개 챕터)
@@ -218,3 +219,32 @@ cd RUST/01-hello-world && cargo run
 | 18 | Macros | 선언적 매크로 (macro_rules!), 속성 매크로 |
 | 19 | Testing | 단위 테스트, 통합 테스트, doc 테스트 |
 | 20 | Web Server | 간단한 HTTP 서버 (TcpListener) |
+
+## Vue.js 기초 (20개 챕터)
+
+```bash
+# Vite 개발 서버 실행 (cd VUE && npm install && npx vite serve .)
+```
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 01 | Introduction | Vue.js 소개, createApp, v-bind |
+| 02 | Template Syntax | 보간법, v-once, v-html |
+| 03 | Data & Event Binding | data, methods, computed, v-on, v-bind |
+| 04 | Computed & Watch | computed getter/setter, watch, deep |
+| 05 | Class & Style Binding | :class 객체/배열, :style 객체/배열 |
+| 06 | Conditional Rendering | v-if/v-else-if/v-else, v-show |
+| 07 | List Rendering | v-for 배열/객체/범위, 필터링, 정렬 |
+| 08 | Event Handling | 이벤트 수식어, 키 수식어, 마우스 수식어 |
+| 09 | Form Input Binding | v-model 모든 타입, .lazy/.number/.trim |
+| 10 | Components | 컴포넌트 등록, props, emit, slot |
+| 11 | Component Props | props 타입 검증, Props Drilling |
+| 12 | Component Emits | $emit, 커스텀 v-model, emit payload |
+| 13 | Slots | 기본 slot, named slot, scoped slot |
+| 14 | Lifecycle Hooks | onMounted, onUnmounted, KeepAlive |
+| 15 | Composition API | ref, reactive, setup, onMounted |
+| 16 | ref & reactive | toRefs, shallowRef, reactive 주의사항 |
+| 17 | Computed & Watch (CA) | watch 다중 값, watchEffect |
+| 18 | provide & inject | 의존성 주입 (테마 시스템) |
+| 19 | Router | vue-router, createWebHistory, $route.params |
+| 20 | Composition Patterns | useCounter, useToggle, useLocalStorage |
