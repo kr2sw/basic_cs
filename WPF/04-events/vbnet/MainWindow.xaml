@@ -1,0 +1,29 @@
+<Window x:Class="Ch04.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="이벤트" Height="400" Width="500">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="LightBlue" Padding="10"
+                MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+            <StackPanel>
+                <TextBlock Text="마우스를 올려보세요" FontWeight="Bold"/>
+                <TextBlock x:Name="lblHover" Text="--"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="1" Margin="0,10" Orientation="Horizontal">
+            <Button x:Name="btnClick" Content="클릭 이벤트" Width="120" Height="30"
+                    Click="BtnClick_Click"/>
+            <Button x:Name="btnDouble" Content="더블클릭" Width="120" Height="30" Margin="10,0"
+                    MouseDoubleClick="BtnDouble_MouseDoubleClick"/>
+        </StackPanel>
+
+        <ListBox x:Name="lbLog" Grid.Row="2" Margin="0,10,0,0"/>
+    </Grid>
+</Window>

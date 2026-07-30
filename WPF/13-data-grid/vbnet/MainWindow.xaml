@@ -1,0 +1,41 @@
+<Window x:Class="Ch13.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DataGrid 예제" Height="450" Width="700">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="DataGrid 예제" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="5"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="추가" Click="Add_Click" Margin="5" Padding="15,8"/>
+            <Button Content="삭제" Click="Delete_Click" Margin="5" Padding="15,8"/>
+            <Button Content="수정 완료" Click="Commit_Click" Margin="5" Padding="15,8"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dataGrid" Grid.Row="2" Margin="5"
+                  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True"
+                  SelectionMode="Single" SelectionUnit="FullRow">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="이름" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="부서" Binding="{Binding Department}" Width="100"/>
+                <DataGridTextColumn Header="직책" Binding="{Binding Position}" Width="100"/>
+                <DataGridTextColumn Header="급여" Binding="{Binding Salary, StringFormat={}{0:N0}}" Width="100"/>
+                <DataGridCheckBoxColumn Header="재직" Binding="{Binding IsActive}" Width="60"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StatusBar Grid.Row="3">
+            <StatusBarItem>
+                <TextBlock x:Name="statusText" Text="준비"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

@@ -1,0 +1,12 @@
+<Page x:Class="Ch15.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="홈" Background="AliceBlue">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Text="🏠 홈 페이지" FontSize="32" FontWeight="Bold" Margin="10"/>
+        <TextBlock Text="WPF 내비게이션 예제에 오신 것을 환영합니다!" FontSize="16" Margin="10"/>
+        <TextBlock Text="Frame과 Page를 사용한 페이지 이동" FontSize="14" Foreground="Gray" Margin="5"/>
+        <Button Content="설정으로 이동" Click="GoToSettings_Click"
+                Margin="10" Padding="15,8" HorizontalAlignment="Center"/>
+    </StackPanel>
+</Page>

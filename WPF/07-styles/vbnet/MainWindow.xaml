@@ -1,0 +1,57 @@
+<Window x:Class="Ch07.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPF 스타일" Height="400" Width="500">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="PrimaryButton">
+            <Setter Property="Background" Value="DodgerBlue"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                CornerRadius="5" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="DeepSkyBlue"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Button" x:Key="DangerButton" BasedOn="{StaticResource PrimaryButton}">
+            <Setter Property="Background" Value="Crimson"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel Margin="15">
+        <TextBlock Text="WPF 스타일 예제" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+        <TextBlock Text="이것은 기본 스타일이 적용된 TextBlock입니다."/>
+        <Separator Margin="10"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="기본 버튼"/>
+            <Button Content="Primary 스타일" Style="{StaticResource PrimaryButton}"/>
+            <Button Content="Danger 스타일" Style="{StaticResource DangerButton}"/>
+        </StackPanel>
+        <Separator Margin="10"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="일반" Padding="10,5"/>
+            <Button Content="Primary" Style="{StaticResource PrimaryButton}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,44 @@
+<Window x:Class="Ch18.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPF 애니메이션" Height="450" Width="600">
+    <Window.Resources>
+        <Storyboard x:Key="FadeInStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:1"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="WPF 애니메이션 예제" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="5"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="페이드 인" Click="FadeIn_Click" Margin="5" Padding="15,8"/>
+            <Button Content="확대/축소" Click="Scale_Click" Margin="5" Padding="15,8"/>
+            <Button Content="회전" Click="Rotate_Click" Margin="5" Padding="15,8"/>
+            <Button Content="색상 변경" Click="Color_Click" Margin="5" Padding="15,8"/>
+            <Button Content="초기화" Click="Reset_Click" Margin="5" Padding="15,8"/>
+        </StackPanel>
+
+        <Border Grid.Row="2" x:Name="animBox" Width="150" Height="150"
+                Background="DodgerBlue" CornerRadius="10"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="scaleTransform"/>
+                    <RotateTransform x:Name="rotateTransform"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <TextBlock Text="WPF" Foreground="White" FontSize="24" FontWeight="Bold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,47 @@
+<Window x:Class="Ch12.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="컬렉션과 ListBox" Height="450" Width="550">
+    <Window.Resources>
+        <DataTemplate x:Key="ProductTemplate">
+            <Border BorderBrush="Silver" BorderThickness="1" CornerRadius="4" Padding="8" Margin="3"
+                    Background="White">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.RowSpan="2" Text="{Binding Id}" FontSize="24" FontWeight="Bold"
+                               Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Name}" FontWeight="Bold"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Price, StringFormat={}{0:C}}"
+                               Foreground="ForestGreen"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="ObservableCollection 예제" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="5"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="항목 추가" Click="AddItem_Click" Margin="5" Padding="15,8"/>
+            <Button Content="선택 삭제" Click="RemoveItem_Click" Margin="5" Padding="15,8"/>
+            <Button Content="전체 삭제" Click="ClearAll_Click" Margin="5" Padding="15,8"/>
+        </StackPanel>
+
+        <ListBox x:Name="itemList" Grid.Row="2" ItemTemplate="{StaticResource ProductTemplate}"
+                 Margin="5"/>
+    </Grid>
+</Window>

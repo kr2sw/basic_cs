@@ -1,0 +1,40 @@
+<Window x:Class="Ch20.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="배포 정보" Height="350" Width="550">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="WPF 배포 정보" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="5"/>
+
+        <GroupBox Grid.Row="1" Header="애플리케이션 정보" Margin="10" Padding="10">
+            <StackPanel>
+                <TextBlock Text="{Binding AppName, StringFormat=이름: {0}}" Margin="3"/>
+                <TextBlock Text="{Binding Version, StringFormat=버전: {0}}" Margin="3"/>
+                <TextBlock Text="{Binding Runtime, StringFormat=런타임: {0}}" Margin="3"/>
+                <TextBlock Text="{Binding OsInfo, StringFormat=OS: {0}}" Margin="3"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Header="게시 방법" Margin="10" Padding="10">
+            <StackPanel>
+                <TextBlock Text="1. 단일 파일 게시" FontWeight="Bold" Margin="3"/>
+                <TextBox IsReadOnly="True" TextWrapping="Wrap" Margin="3" Padding="5"
+                         Text="dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true"/>
+                <Separator Margin="5"/>
+                <TextBlock Text="2. ClickOnce 배포" FontWeight="Bold" Margin="3"/>
+                <TextBox IsReadOnly="True" TextWrapping="Wrap" Margin="3" Padding="5"
+                         Text="Visual Studio &gt; 프로젝트 우클릭 &gt; 게시 &gt; ClickOnce 구성"/>
+                <Separator Margin="5"/>
+                <TextBlock Text="3. MSIX 패키징" FontWeight="Bold" Margin="3"/>
+                <TextBox IsReadOnly="True" TextWrapping="Wrap" Margin="3" Padding="5"
+                         Text="새 MSIX 패키징 프로젝트 추가 &gt; 참조 추가 &gt; 빌드"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>

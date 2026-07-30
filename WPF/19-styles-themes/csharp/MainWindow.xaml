@@ -1,0 +1,36 @@
+<Window x:Class="Ch19.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="테마 전환" Height="350" Width="550">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="스타일 및 테마 전환" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="5"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Button Content="☀️ 라이트 테마" Click="LightTheme_Click" Margin="5" Padding="15,8" Width="150"/>
+            <Button Content="🌙 다크 테마" Click="DarkTheme_Click" Margin="5" Padding="15,8" Width="150"/>
+        </StackPanel>
+
+        <GroupBox Grid.Row="2" Header="설정" Margin="10" Padding="10">
+            <StackPanel>
+                <CheckBox Content="알림 표시" Margin="5" IsChecked="True"/>
+                <CheckBox Content="자동 업데이트" Margin="5"/>
+                <Slider Minimum="0" Maximum="100" Value="50" Margin="5"/>
+                <Button Content="저장" Margin="5,10" Padding="10,5" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </GroupBox>
+
+        <StatusBar Grid.Row="3">
+            <StatusBarItem>
+                <TextBlock x:Name="statusText" Text="현재 테마: 라이트"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
