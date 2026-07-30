@@ -1,6 +1,6 @@
 # Basic CS - 프로그래밍 기초 강의 자료
 
-Arduino, C, C#, Java, Node.js, PHP, Python, React, Rust, Vue.js 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
+Arduino, C, C#, Java, Node.js, PHP, Python, React, Rust, TypeScript, Vue.js 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
 ## 구조
 
@@ -15,6 +15,7 @@ basic_cs/
 ├── ARDUINO/     Arduino 기초 강의 (20개 챕터)
 ├── REACT/       React 기초 강의 (20개 챕터)
 ├── RUST/        Rust 기초 강의 (20개 챕터)
+├── TYPESCRIPT/  TypeScript 기초 강의 (20개 챕터)
 └── VUE/         Vue.js 기초 강의 (20개 챕터)
 ```
 
@@ -250,6 +251,35 @@ cd RUST/01-hello-world && cargo run
 | 18 | Macros | 선언적 매크로 (macro_rules!), 속성 매크로 |
 | 19 | Testing | 단위 테스트, 통합 테스트, doc 테스트 |
 | 20 | Web Server | 간단한 HTTP 서버 (TcpListener) |
+
+## TypeScript 기초 (20개 챕터)
+
+```bash
+cd TYPESCRIPT/01-introduction && npx ts-node index.ts
+```
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 01 | Introduction | TypeScript 소개, tsc, tsconfig, 기본 타입 |
+| 02 | Basic Types | number/string/boolean, tuple, enum, any/unknown/never |
+| 03 | Interfaces | interface, optional/readonly, extends, index signature |
+| 04 | Types | type alias, union, intersection, literal types |
+| 05 | Functions | 매개변수/반환 타입, 오버로드, this |
+| 06 | Classes | class, implements, abstract, parameter properties |
+| 07 | Generics | 제네릭 함수/클래스/제약, infer |
+| 08 | Enums & Type Guards | enum, typeof, instanceof, discriminated union |
+| 09 | Utility Types | Partial, Required, Pick, Omit, Record, ReturnType |
+| 10 | Modules | export/import, namespace, ambient 선언 |
+| 11 | Type Manipulation | keyof, typeof, conditional types, mapped types |
+| 12 | Template Literal Types | 템플릿 리터럴, intrinsic string types |
+| 13 | Decorators | 클래스/메서드/프로퍼티/파라미터 데코레이터 |
+| 14 | Declaration Files | .d.ts, declare, module augmentation |
+| 15 | Advanced Types | recursive types, branded types, satisfies |
+| 16 | Configuration | tsconfig.json, strict mode, paths, references |
+| 17 | React with TS | FC, useState/useRef typing, 이벤트 핸들러 |
+| 18 | Node.js with TS | Express, Request/Response, 미들웨어 |
+| 19 | Testing | jest, ts-jest, typed mock |
+| 20 | Real-world Project | Todo API (Express + TypeScript) |
 
 ## Arduino 기초 (20개 챕터)
 
