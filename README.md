@@ -1,6 +1,6 @@
 # Basic CS - 프로그래밍 기초 강의 자료
 
-C, C#, Java, Node.js, PHP, Python, Rust 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
+C, C#, Java, Node.js, PHP, Python, React, Rust, Vue.js 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
 ## 구조
 
@@ -12,6 +12,7 @@ basic_cs/
 ├── NODEJS/      Node.js 기초 강의 (20개 챕터)
 ├── PHP/         PHP 기초 강의 (20개 챕터)
 ├── PYTHON/      Python 기초 강의 (20개 챕터)
+├── REACT/       React 기초 강의 (20개 챕터)
 ├── RUST/        Rust 기초 강의 (20개 챕터)
 └── VUE/         Vue.js 기초 강의 (20개 챕터)
 ```
@@ -190,6 +191,35 @@ cd PYTHON/01-hello-world && python main.py
 | 18 | JSON & APIs | json 모듈, urllib.request, GET/POST |
 | 19 | venv & pip | 가상환경, requirements.txt, pip |
 | 20 | Testing | unittest, pytest, assert, mock |
+
+## React 기초 (20개 챕터)
+
+```bash
+cd REACT/01-introduction && npm install && npm run dev
+```
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 01 | Introduction | React 소개, createRoot, JSX 기본 |
+| 02 | JSX | JSX 표현식, 조건부 렌더링, Fragments |
+| 03 | Components & Props | 함수 컴포넌트, props, children |
+| 04 | State & useState | useState, 상태 업데이트, 배열/객체 |
+| 05 | Event Handling | onClick, onChange, onSubmit, 합성 이벤트 |
+| 06 | Conditional Rendering | &&, 삼항연산자, if/else 조건 분기 |
+| 07 | Lists & Keys | map, filter, key prop, 리스트 필터링 |
+| 08 | Forms | 제어 컴포넌트, input/select/checkbox, 검증 |
+| 09 | useEffect | useEffect, 의존성 배열, cleanup, 데이터 패칭 |
+| 10 | useRef & DOM | useRef, forwardRef, DOM 조작 |
+| 11 | Context API | createContext, useContext, Provider 패턴 |
+| 12 | useReducer | useReducer, dispatch, 복잡한 상태 |
+| 13 | Custom Hooks | useLocalStorage, useFetch, Hook 합성 |
+| 14 | React Router | BrowserRouter, Routes, useParams |
+| 15 | Styling | Inline styles, 동적 className |
+| 16 | Error Handling | ErrorBoundary, try/catch, fallback UI |
+| 17 | Performance | React.memo, useMemo, useCallback, Suspense |
+| 18 | Portals & Fragments | createPortal, Fragment, 모달 예제 |
+| 19 | Testing | React Testing Library, jest, fireEvent |
+| 20 | Deployment | 빌드, 환경변수, Netlify/Vercel 배포 |
 
 ## Rust 기초 (20개 챕터)
 
