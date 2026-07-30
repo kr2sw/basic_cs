@@ -2,9 +2,27 @@
 
 PHP 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
+## 역사
+
+PHP는 1994년 Rasmus Lerdorf가 개인 홈페이지를 관리하기 위해 만든 "Personal Home Page Tools"에서 시작했습니다. 1995년 PHP/FI 2.0이 공개되었고, 1997년 Zeev Suraski와 Andi Gutmans가 PHP 3.0의 파서를 재작성하면서 PHP의 의미가 "PHP: Hypertext Preprocessor"로 변경되었습니다. 2004년 PHP 5(Zend Engine 2)에서 객체 지향 기능이 대폭 강화되었고, 2015년 PHP 7(Zend Engine 3)에서 성능이 2배 향상되었습니다. 2020년 PHP 8.0에서는 JIT 컴파일러와 named arguments, attributes 등 현대적인 기능이 도입되었습니다. 전 세계 웹사이트의 약 75%가 PHP로 구동되고 있습니다.
+
+## 특징
+
+- **서버사이드 스크립트**: HTML에 직접 삽입 가능한 임베디드 언어
+- **광범위한 호스팅**: 대부분의 웹 호스팅이 PHP를 기본 지원
+- **방대한 CMS 생태계**: WordPress, Drupal, Joomla 등이 PHP 기반
+- **다양한 데이터베이스 지원**: MySQL, PostgreSQL, SQLite, MongoDB 등
+- **세션/쿠키 관리**: 내장된 세션 및 쿠키 처리 기능
+- **컴포저(Composer)**: 현대적인 의존성 관리와 오토로딩
+- **성능**: PHP 8.0+ JIT 컴파일러로 대폭 향상된 성능
+
+## 실행
+
 ```bash
 cd PHP/01-hello-world && php index.php
 ```
+
+## 목차
 
 | # | 주제 | 설명 |
 |---|------|------|

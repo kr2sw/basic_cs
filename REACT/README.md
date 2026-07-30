@@ -2,6 +2,20 @@
 
 React 라이브러리의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
+## 역사
+
+React는 2011년 Facebook(현 Meta)의 Jordan Walke가 뉴스피드에 광고를 효율적으로 표시하기 위해 내부 프로젝트로 개발했습니다. 2013년 JSConf US에서 오픈소스로 공개되었고, 가상 DOM(Virtual DOM)과 단방향 데이터 흐름이 큰 주목을 받았습니다. 2015년 React Native가 발표되어 모바일 앱 개발로 확장되었고, 2016년에는 React의 설계 철학을 계승한 Vue.js와 Angular와 함께 "Big 3" 프론트엔드 프레임워크로 자리잡았습니다. 2019년 Hooks(React 16.8)가 도입되면서 함수형 컴포넌트와 상태 관리의 패러다임이 혁신적으로 변화했습니다. 2023년 React Server Components와 App Router가 포함된 Next.js 13이 발표되었습니다.
+
+## 특징
+
+- **가상 DOM(Virtual DOM)**: 실제 DOM 조작을 최소화하여 성능 최적화
+- **컴포넌트 기반**: 독립적이고 재사용 가능한 UI 컴포넌트로 구성
+- **단방향 데이터 흐름**: props를 통한 명시적 데이터 전달 (디버깅 용이)
+- **JSX**: JavaScript 내에서 XML/HTML 같은 선언적 UI 작성
+- **Hooks**: useState, useEffect 등 함수형 컴포넌트에서 상태와 생명주기 관리
+- **방대한 생태계**: React Router, Redux, Next.js, Gatsby 등 수많은 도구와 라이브러리
+- **선언적 UI**: 상태에 따라 UI가 자동으로 업데이트되는 선언적 패러다임
+
 ## 실행 방법
 
 ```bash

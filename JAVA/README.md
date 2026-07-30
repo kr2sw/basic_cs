@@ -2,9 +2,27 @@
 
 Java 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
+## 역사
+
+Java는 1995년 Sun Microsystems의 James Gosling과 Green Team이 "Oak"라는 이름으로 처음 개발했습니다. 원래는 가전제기(STB, PDA)용 언어였으나, 인터넷의 성장과 함께 웹 애플리케이션 언어로 급부상했습니다. 1995년 Netscape Navigator에 Java 애플릿이 탑재되면서 대중화되었고, 2006년 오픈소스(GPL)로 전환되었습니다. 2010년 Oracle이 Sun을 인수하면서 Java의 주도권이 넘어갔습니다. 주요 버전으로는 Java 5(2004, Generics/Enum), Java 8(2014, Lambda/Stream), Java 17(2021, LTS), Java 21(2023, LTS)이 있습니다.
+
+## 특징
+
+- **Write Once, Run Anywhere**: JVM(Java Virtual Machine) 위에서 실행되어 플랫폼 독립적
+- **자동 메모리 관리**: 가비지 컬렉터(GC)가 메모리를 자동으로 관리
+- **강력한 표준 라이브러리**: Collections, Stream, I/O, Networking, JDBC 등 방대한 API
+- **멀티스레딩**: 언어 수준의 스레드 지원과 동기화 도구
+- **보안**: 바이트코드 검증, 샌드박스, SecurityManager
+- **대규모 엔터프라이즈**: Spring, Jakarta EE 등 강력한 프레임워크 생태계
+- **정적 타입 + 동적 기능**: 제네릭, 리플렉션, 어노테이션
+
+## 실행
+
 ```bash
 cd JAVA/01-hello-world && javac Main.java && java Main
 ```
+
+## 목차
 
 | # | 주제 | 설명 |
 |---|------|------|
