@@ -1,0 +1,38 @@
+<Window x:Class="Ch34.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="34 - 멀티스레딩 심화" Height="360" Width="600">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="TPL Dataflow 파이프라인 (병렬 + async/await)"
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="파이프라인 실행" Command="{Binding RunCommand}" Padding="16,8"/>
+            <Button Content="취소" Command="{Binding CancelCommand}" Padding="16,8" Margin="10,0,0,0"/>
+            <TextBlock Text="{Binding Status}" VerticalAlignment="Center" Margin="16,0,0,0"
+                       FontWeight="Bold" Foreground="SteelBlue"/>
+        </StackPanel>
+
+        <ProgressBar Grid.Row="2" Height="20" Minimum="0" Maximum="100"
+                     Value="{Binding Processed}" Margin="0,16,0,6"/>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <TextBlock Text="{Binding Processed, StringFormat=처리: {0} / 100}"
+                       FontWeight="Bold" Margin="0,0,20,0"/>
+            <TextBlock Text="{Binding Sum, StringFormat=제곱 합: {0:N0}}"
+                       FontWeight="Bold"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="4" Foreground="Gray" FontSize="11" TextWrapping="Wrap"
+                   VerticalAlignment="Bottom"
+                   Text="TransformBlock(제곱)과 ActionBlock(합산)을 LinkTo로 연결하고 PropagateCompletion으로 완료를 전파합니다. MaxDegreeOfParallelism=4로 병렬 처리하며, 결과 반영은 Progress(UI 스레드 마샬링)로 안전하게 수행합니다. 취소는 블록 옵션의 CancellationToken으로 협조합니다."/>
+    </Grid>
+</Window>

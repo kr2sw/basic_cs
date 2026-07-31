@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Rust + WASM 심화</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Rust + WASM 심화 (파서 성능)</h1>
+  <p>빌드: <code>wasm-pack build --target web</code> (이 디렉터리에서)</p>
+  <button onclick="runParse()">parse_ints 파싱</button>
+  <button onclick="runKv()">parse_key_value 객체 변환</button>
+  <button onclick="runBench()">WASM vs JS 소수 합 벤치마크</button>
+  <pre id="out"></pre>
+
+  <script type="module">
+    import init, {
+      parse_ints, count_words, parse_key_value, sum_primes
+    } from '../pkg/parser_wasm.js';
+
+    const out = document.getElementById('out');
+    const print = (m) => {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    };
+
+    await init();
+
+    window.runParse = () => {
+      const input = 'a1 b22 c333 d4444';
+      const arr = parse_ints(input);
+      const words = count_words('wasm is fast in the browser');
+      print(`parse_ints("${input}") = [${Array.from(arr).join(', ')}]`);
+      print(`count_words("wasm is fast in the browser") = ${words}`);
+    };
+
+    window.runKv = () => {
+      const obj = parse_key_value('name: Rust\ntype: wasm\nspeed: fast');
+      print(`parse_key_value 결과: ${JSON.stringify(obj)}`);
+    };
+
+    window.runBench = () => {
+      const LIMIT = 100000;
+      let t0 = performance.now();
+      const wasmSum = sum_primes(LIMIT);
+      const wasmMs = performance.now() - t0;
+
+      function jsSumPrimes(limit) {
+        let sum = 0;
+        for (let n = 2; n <= limit; n++) {
+          let prime = true;
+          for (let d = 2; d * d <= n; d++) {
+            if (n % d === 0) { prime = false; break; }
+          }
+          if (prime) sum += n;
+        }
+        return sum;
+      }
+
+      t0 = performance.now();
+      const jsSum = jsSumPrimes(LIMIT);
+      const jsMs = performance.now() - t0;
+
+      print(`소수 합(${LIMIT}): WASM=${wasmSum} (${wasmMs.toFixed(1)}ms), ` +
+            `JS=${jsSum} (${jsMs.toFixed(1)}ms), ${(jsMs / wasmMs).toFixed(1)}배 차이`);
+    };
+
+    print('Rust WASM 모듈 로드 완료');
+  </script>
+</body>
+</html>

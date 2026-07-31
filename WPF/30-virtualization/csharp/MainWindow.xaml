@@ -1,0 +1,49 @@
+<Window x:Class="Ch30.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="30 - 가상화와 성능" Height="520" Width="680">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="가상화: 10만 개 항목 처리"
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+
+        <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,8">
+            <CheckBox Content="가상화 사용" IsChecked="{Binding IsVirtualizing}"
+                      VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBlock Text="VirtualizationMode:" Margin="20,0,6,0" VerticalAlignment="Center"/>
+            <ComboBox Width="130" ItemsSource="{Binding VirtualizationModes}"
+                      SelectedItem="{Binding VirtualizationMode}"/>
+            <TextBlock Text="ScrollUnit:" Margin="20,0,6,0" VerticalAlignment="Center"/>
+            <ComboBox Width="120" ItemsSource="{Binding ScrollUnits}"
+                      SelectedItem="{Binding ScrollUnit}"/>
+        </WrapPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button Content="10만 개 로드" Command="{Binding LoadCommand}" Padding="14,7"/>
+            <Button Content="맨 끝으로 스크롤" Click="ScrollEnd_Click" Padding="14,7" Margin="8,0,0,0"/>
+            <TextBlock x:Name="loadInfo" VerticalAlignment="Center" Margin="16,0,0,0"
+                       Foreground="SteelBlue" FontWeight="Bold"/>
+            <TextBlock x:Name="scrollInfo" VerticalAlignment="Center" Margin="16,0,0,0"
+                       Foreground="DarkOrange" FontWeight="Bold"/>
+        </StackPanel>
+
+        <Border Grid.Row="3" BorderBrush="#CCCCCC" BorderThickness="1">
+            <ListBox x:Name="itemList" ItemsSource="{Binding Items}"
+                     VirtualizingPanel.IsVirtualizing="{Binding IsVirtualizing}"
+                     VirtualizingPanel.VirtualizationMode="{Binding VirtualizationMode}"
+                     VirtualizingPanel.ScrollUnit="{Binding ScrollUnit}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Margin="2"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</Window>

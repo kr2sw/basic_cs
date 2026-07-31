@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Emscripten 파일 시스템</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; min-height: 60px; }
+  </style>
+</head>
+<body>
+  <h1>Emscripten FS (MEMFS / IDBFS)</h1>
+  <p>이 페이지는 <code>emcc fs_example.c -o fs.js -sUSE_IDBFS=1 -sFORCE_FILESYSTEM=1</code>로 컴파일해야 합니다.</p>
+  <button onclick="Module._demoMemfs()">MEMFS 읽기/쓰기</button>
+  <button onclick="Module._persistToIdb()">IDBFS에 저장</button>
+  <button onclick="Module._loadFromIdb()">IDBFS에서 복원</button>
+  <button onclick="Module._listRoot()">루트 목록</button>
+  <pre id="out"></pre>
+
+  <script>
+    // Emscripten 모듈을 로드하기 전에 print를 재정의해야 화면 출력이 보입니다
+    var Module = {
+      print: (text) => {
+        const el = document.getElementById('out');
+        el.textContent += (el.textContent ? '\n' : '') + text;
+      },
+      printErr: (text) => console.error(text)
+    };
+  </script>
+  <script src="fs.js"></script>
+</body>
+</html>

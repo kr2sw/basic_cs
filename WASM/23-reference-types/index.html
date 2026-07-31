@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 참조 타입</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>참조 타입: externref / funcref</h1>
+  <button onclick="saveAndGet()">saveRef(객체) → getSaved()</button>
+  <button onclick="checkNull()">isSavedNull()</button>
+  <button onclick="logRef()">logRef(객체)</button>
+  <button onclick="getNull()">getNull() → is_null 확인</button>
+  <button onclick="invokeCb()">invokeCallback(1, 5)</button>
+  <button onclick="applyRef()">applyRef(funcref, 7)</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    let exports = null;
+
+    async function init() {
+      const importObject = {
+        env: {
+          // externref를 받아 콘솔에 로그하는 JS 함수
+          logObject(ref) {
+            console.log('[WASM] logObject:', ref);
+          }
+        }
+      };
+      const { instance } = await WebAssembly.instantiateStreaming(
+        fetch('refs.wasm'), importObject);
+      exports = instance.exports;
+    }
+
+    function print(msg) {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + msg;
+    }
+
+    function saveAndGet() {
+      const obj = { type: 'user', id: 1 };   // 일반 JS 객체
+      exports.saveRef(obj);
+      const back = exports.getSaved();
+      print(`동일 참조? ${back === obj} (back === obj)`);
+    }
+
+    function checkNull() {
+      const n = exports.isSavedNull();
+      print(`isSavedNull() = ${n}`);
+    }
+
+    function logRef() {
+      exports.logRef({ hello: 'world' });
+      print('logObject 호출됨 (콘솔 확인)');
+    }
+
+    function getNull() {
+      const ref = exports.getNull();
+      // JS에서는 externref null이 null로 매핑됩니다
+      print(`getNull() === null? ${ref === null}`);
+    }
+
+    function invokeCb() {
+      try {
+        const r = exports.invokeCallback(1, 5);   // cbB: 5 * 2
+        print(`invokeCallback(1, 5) = ${r}`);
+      } catch (e) { print('트랩: ' + e); }
+    }
+
+    function applyRef() {
+      // funcref를 만들 수는 없으므로 테이블 참조를 직접 호출하는 대신
+      // call_ref 데모는 인덱스 0($cbA)을 호출하도록 유도합니다.
+      const r = exports.invokeCallback(0, 7);     // cbA: 7 + 100
+      print(`invokeCallback(0, 7) = ${r} (call_ref와 같은 결과)`);
+    }
+
+    init().catch(console.error);
+  </script>
+</body>
+</html>

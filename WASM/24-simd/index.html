@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM SIMD 데모</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>SIMD v128 데모</h1>
+  <button onclick="runAdd()">i32x4 덧셈 (검증)</button>
+  <button onclick="runSum()">i32x4 합산</button>
+  <button onclick="runSwizzle()">i8x16 셔플</button>
+  <button onclick="runBench()">SIMD vs 스칼라 벤치마크</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    let exports = null;
+    let memory = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('simd.wasm'));
+      exports = instance.exports;
+      memory = exports.memory;
+    }
+
+    function print(m) {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    }
+
+    function runAdd() {
+      const N = 4096; // i32 4096개 = 16KB
+      const aPtr = 0, bPtr = 0x4000, dstPtr = 0x8000;
+      const bytes = new Uint8Array(memory.buffer);
+      const aView = new Int32Array(memory.buffer, aPtr, N);
+      const bView = new Int32Array(memory.buffer, bPtr, N);
+      for (let i = 0; i < N; i++) { aView[i] = i; bView[i] = i * 2; }
+      exports.add_i32x4(aPtr, bPtr, dstPtr, N * 4);
+      const dst = new Int32Array(memory.buffer, dstPtr, N);
+      let ok = true;
+      for (let i = 0; i < N; i++) if (dst[i] !== i + i * 2) { ok = false; break; }
+      print(`i32x4 덧셈 검증: ${ok ? '성공' : '실패'} (dst[0]=${dst[0]}, dst[4095]=${dst[4095]})`);
+    }
+
+    function runSum() {
+      const N = 4096;
+      const ptr = 0;
+      const view = new Int32Array(memory.buffer, ptr, N);
+      let expected = 0;
+      for (let i = 0; i < N; i++) { view[i] = i; expected += i; }
+      const got = exports.sum_i32x4(ptr, N * 4);
+      print(`i32x4 합산: got=${got}, expected=${expected}, 일치=${got === expected}`);
+    }
+
+    function runSwizzle() {
+      const src = 0, mask = 0x1000, dst = 0x2000;
+      // src에 "ABCDEFGHIJKLMNOP", mask에 역순 인덱스
+      new TextEncoder().encodeInto('ABCDEFGHIJKLMNOP', new Uint8Array(memory.buffer, src, 16));
+      const maskArr = new Uint8Array(memory.buffer, mask, 16);
+      for (let i = 0; i < 16; i++) maskArr[i] = 15 - i;  // 역순
+      exports.swizzle_i8x16(src, mask, dst);
+      const result = new TextDecoder().decode(new Uint8Array(memory.buffer, dst, 16));
+      print(`i8x16 셔플: "${result}" (기대: "PONMLKJIHGFEDCBA")`);
+    }
+
+    function runBench() {
+      const N = 400000; // i32 40만 개
+      const aPtr = 0, bPtr = 0x100000, dstPtr = 0x200000;
+      const aView = new Int32Array(memory.buffer, aPtr, N);
+      const bView = new Int32Array(memory.buffer, bPtr, N);
+      for (let i = 0; i < N; i++) { aView[i] = i; bView[i] = 1; }
+
+      const reps = 20;
+      let t0 = performance.now();
+      for (let r = 0; r < reps; r++) exports.add_i32x4(aPtr, bPtr, dstPtr, N * 4);
+      const simdMs = (performance.now() - t0) / reps;
+
+      t0 = performance.now();
+      for (let r = 0; r < reps; r++) exports.add_i32_scalar(aPtr, bPtr, dstPtr, N * 4);
+      const scalarMs = (performance.now() - t0) / reps;
+
+      print(`N=40만: SIMD ${simdMs.toFixed(2)}ms, 스칼라 ${scalarMs.toFixed(2)}ms, ${(scalarMs/simdMs).toFixed(2)}배 빠름`);
+    }
+
+    init().catch(e => print('SIMD 미지원 환경일 수 있음: ' + e));
+  </script>
+</body>
+</html>

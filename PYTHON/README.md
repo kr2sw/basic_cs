@@ -46,3 +46,23 @@ cd PYTHON/01-hello-world && python main.py
 | 18 | JSON & APIs | json, requests, REST API, API 인증 |
 | 19 | venv & pip | 가상환경, pip install, requirements.txt |
 | 20 | Testing | unittest, pytest, fixture, mock |
+| 21 | Advanced OOP | dataclass, __slots__, 추상 클래스, 매직 메서드 |
+| 22 | Type Hints | TypedDict, Protocol, NewType, mypy |
+| 23 | Context Managers | contextlib, @contextmanager, async context |
+| 24 | Threads & GIL | Thread, Lock, Queue, 동기화 |
+| 25 | Multiprocessing | Process, Pool, ProcessPoolExecutor, IPC |
+| 26 | Asyncio | async/await, Task, gather, asyncio.run |
+| 27 | Async I/O | aiohttp/httpx 비동기 클라이언트, 로컬 서버 |
+| 28 | Metaclasses | type(), __new__, 커스텀 메타클래스 |
+| 29 | Descriptors | __get__/__set__, property 내부 동작 |
+| 30 | Functional | itertools, functools.partial, curry |
+| 31 | Data Formats | csv, openpyxl, configparser, pickle |
+| 32 | Web Scraping | requests, BeautifulSoup, robots.txt |
+| 33 | Advanced Regex | 전방탐색, 역참조, 플래그, re 패턴 |
+| 34 | Performance | cProfile, timeit, lru_cache, 코드 최적화 |
+| 35 | Memory | gc, weakref, __slots__, 순환 참조 |
+| 36 | Networking | socket, TCP/UDP 클라이언트-서버 |
+| 37 | Database | sqlite3, SQLAlchemy Core/ORM 기초 |
+| 38 | GUI | tkinter 기본 위젯, 이벤트 |
+| 39 | Advanced Testing | pytest fixture, parametrize, mock |
+| 40 | Mini Project | 명령줄 할일 관리 앱 |

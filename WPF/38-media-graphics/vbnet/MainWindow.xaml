@@ -1,0 +1,40 @@
+<Window x:Class="Ch38.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Ch38"
+        Title="38 - 미디어와 그래픽" Height="620" Width="600">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="DrawingVisual + RenderTargetBitmap + 효과"
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,14"/>
+
+        <TextBlock Grid.Row="1" Text="1) DrawingVisual로 그린 벡터 그래픽" FontWeight="Bold"
+                   Margin="0,0,0,6"/>
+        <Border Grid.Row="2" BorderBrush="#CCCCCC" BorderThickness="1">
+            <local:DrawingVisualHost x:Name="drawingHost" Width="400" Height="240"
+                                     HorizontalAlignment="Center"/>
+        </Border>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,14,0,0">
+            <Button Content="PNG로 저장" Click="Save_Click" Padding="16,8"/>
+            <TextBlock x:Name="statusText" VerticalAlignment="Center" Margin="16,0,0,0"
+                       FontWeight="Bold" Foreground="SteelBlue"/>
+        </StackPanel>
+
+        <Border Grid.Row="4" Margin="0,14,0,0" Padding="14" CornerRadius="6"
+                Background="#FFF3E0" VerticalAlignment="Top">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="3" Opacity="0.5"/>
+            </Border.Effect>
+            <TextBlock Text="XAML 효과 예제: DropShadowEffect가 적용된 패널"
+                       FontWeight="Bold" Foreground="#E65100"/>
+        </Border>
+    </Grid>
+</Window>

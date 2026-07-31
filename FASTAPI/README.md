@@ -51,3 +51,23 @@ uvicorn main:app --reload
 | 18 | Async Advanced | httpx.AsyncClient, asyncio.gather |
 | 19 | Caching | ETag, lru_cache, Redis 캐싱 |
 | 20 | Deployment | Uvicorn/Gunicorn, Docker, docker-compose |
+| 21 | Pydantic v2 | computed_field, model_validator, 재사용 모델 |
+| 22 | SQLAlchemy 고급 | relationship, 조인, 비동기 엔진 |
+| 23 | Alembic | 마이그레이션 개념, revision, upgrade |
+| 24 | 고급 보안 | RBAC, 리프레시 토큰, 토큰 저장 |
+| 25 | 페이지네이션 | Page/Query 검증, 커서 기반 페이징 |
+| 26 | 파일 처리 | 청크 업로드, 스트리밍, 검증 |
+| 27 | 백그라운드 작업 | Celery/ARQ 개념, InProcess 큐 |
+| 28 | 속도 제한 | RateLimiter 미들웨어 구현 |
+| 29 | 멀티테넌시 | 테넌트 분리, 헤더 기반 라우팅 |
+| 30 | 고급 테스팅 | pytest-asyncio, monkeypatch, coverage |
+| 31 | OpenAPI 커스터마이징 | 태그, 메타데이터, 커스텀 문서 |
+| 32 | 모니터링 | structlog, Prometheus 메트릭 개념 |
+| 33 | Docker 고급 | 멀티스테이지 빌드, docker-compose |
+| 34 | 배포 | Gunicorn/Uvicorn 워커, Nginx, systemd |
+| 35 | GraphQL | Strawberry 기초, 스키마, 리졸버 |
+| 36 | WebSocket 고급 | 룸, 인증, 재연결 |
+| 37 | SSE | 이벤트 스트리밍, 실시간 푸시 |
+| 38 | 마이크로서비스 | httpx 호출 패턴, 디스커버리 |
+| 39 | 대용량 스트리밍 | StreamingResponse, 청크 전송 |
+| 40 | 프로덕션급 API | 종합 프로젝트 |

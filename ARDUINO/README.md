@@ -1,4 +1,7 @@
-# Arduino 기초 (20개 챕터)
+# Arduino 강좌 (40개 챕터)
+
+- 기초 과정: 01~20
+- 중급 과정: 21~40
 
 Arduino 마이크로컨트롤러 프로그래밍의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
@@ -48,3 +51,23 @@ arduino-cli upload --fqbn arduino:avr:uno -p COM3 01-introduction/01-introductio
 | 18 | Timers | millis(), micros(), Blink Without Delay |
 | 19 | I2C | Wire 라이브러리, Master/Slave |
 | 20 | IoT (ESP) | ESP8266/ESP32 WiFi, HTTP 요청 |
+| 21 | 고급 센서 | BMP280 기압, MPU6050 가속도/자이로 |
+| 22 | SPI | SPI 핀, 시프트 레지스터, SD 카드 |
+| 23 | SD 카드 | 파일 로깅, CSV 저장, 타임스탬프 |
+| 24 | 블루투스 | HC-05/HM-10 AT 명령, 데이터 송수신 |
+| 25 | WiFi | ESP8266/ESP32 HTTP 클라이언트/서버 |
+| 26 | MQTT | pub/sub, 브로커 연결, 토픽 관리 |
+| 27 | 실시간 시계 | DS3231, 시간 동기화, 알람 |
+| 28 | 스테퍼 모터 | A4988 드라이버, 스텝 제어 |
+| 29 | 오디오 | DFPlayer, 멜로디 생성, 볼륨 제어 |
+| 30 | OLED/TFT | I2C OLED, 그래픽, 메뉴 UI |
+| 31 | GPS | NMEA 파싱, 위치/속도/시간 |
+| 32 | 전원 관리 | 딥 슬립, 인터럽트 웨이크, 배터리 |
+| 33 | PID | 온도/모터 PID 루프 |
+| 34 | 상태 머신 | enum 기반 FSM, 시나리오 설계 |
+| 35 | 멀티태스킹 | millis 스케줄러, 비블로킹 패턴 |
+| 36 | 데이터 수집 | 시리얼 플로터, CSV, 샘플링 |
+| 37 | 보안 | XOR 암호화, 키 저장, 인증 토큰 |
+| 38 | ESP32 심화 | 웹 서버, OTA, FreeRTOS 개념 |
+| 39 | IoT 클라우드 | HTTP POST, 대시보드 연동 개념 |
+| 40 | 종합 프로젝트 | 기상 관측소 / 로봇 제어 |

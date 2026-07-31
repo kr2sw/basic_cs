@@ -47,3 +47,28 @@ cd 프로젝트 && npm install && npm run dev
 | 18 | Provide & Inject | provide, inject, 전역 상태 공유, reactivity |
 | 19 | Vue Router | router 설치, routes, router-link, router-view, 네비게이션 |
 | 20 | Composition Patterns | composables, 커스텀 훅, 재사용성 패턴 |
+
+## 목차 (중급 21-40)
+
+| # | 주제 | 설명 |
+|---|------|------|
+| 21 | Composition Advanced | Composition API 심화, 라이프사이클, ref vs reactive, 함수 분리 |
+| 22 | Pinia | 상태 관리, store, actions, getters |
+| 23 | Router Advanced | 라우터 심화, 가드, lazy loading, 메타 필드 |
+| 24 | Forms Validation | 폼 검증, VeeValidate, 커스텀 규칙 |
+| 25 | HTTP Axios | HTTP 통신, Axios 인터셉터, API 레이어 패턴 |
+| 26 | TypeScript + Vue | TypeScript, script setup 타입, props 타입 |
+| 27 | Reusable Components | 재사용 컴포넌트, v-model 패턴, composable props |
+| 28 | Teleport & Suspense | Teleport, Suspense, 모달, 비동기 컴포넌트 |
+| 29 | Render Functions | 렌더 함수, h(), VNode, JSX |
+| 30 | Custom Directives | 커스텀 디렉티브, v-focus, v-click-outside |
+| 31 | Plugins | 플러그인 개발, app.use, provide/inject |
+| 32 | Testing | 테스팅, Vitest, Vue Test Utils, e2e 개념 |
+| 33 | Performance | 성능 최적화, defineAsyncComponent, memoization, v-memo |
+| 34 | Transitions & Animations | 전환과 애니메이션, Transition, TransitionGroup |
+| 35 | SSR & Nuxt | SSR 개념, hydration, Nuxt 시작 |
+| 36 | Nuxt Advanced | Nuxt 심화, data fetching, middleware, layouts |
+| 37 | Composables Deep | 컴포저블 심화, useMouse, useFetch 구현, 패턴 |
+| 38 | Accessibility | 접근성, ARIA, 포커스 관리, 키보드 |
+| 39 | Security | 보안, XSS, v-html 위험, CSP, 인증 가드 |
+| 40 | Final Project | 종합 프로젝트, 대시보드 앱 (전체 통합) |

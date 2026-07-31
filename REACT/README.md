@@ -1,4 +1,4 @@
-# React 기초 (20개 챕터)
+# React 기초·중급 (40개 챕터)
 
 React 라이브러리의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
@@ -49,3 +49,23 @@ npm run dev
 | 18 | Portals & Fragments | createPortal, Fragment, 모달 예제 |
 | 19 | Testing | React Testing Library, jest, screen, fireEvent |
 | 20 | Deployment | 빌드, 환경변수, Netlify/Vercel 배포 |
+| 21 | Advanced Hooks | 커스텀 훅 합성, 훅 규칙, useMemo/useCallback |
+| 22 | State Management | Context + useReducer 대형 상태 관리 |
+| 23 | Zustand / Redux Toolkit | 외부 상태 라이브러리, Provider 패턴 |
+| 24 | Data Fetching | TanStack Query, useQuery/useMutation |
+| 25 | Advanced Router | 중첩 라우트, 인증 가드, useNavigate |
+| 26 | Forms Advanced | React Hook Form + Zod 검증 |
+| 27 | Performance | React.memo, 코드 스플리팅, Profiler |
+| 28 | Suspense | lazy, Suspense, useTransition |
+| 29 | Advanced Testing | MSW, user-event, e2e 개념 |
+| 30 | Next.js Basics | SSR, SSG, ISR 개념 |
+| 31 | Next.js App Router | 서버/클라이언트 컴포넌트 |
+| 32 | Accessibility | ARIA, 키보드 내비게이션 |
+| 33 | Security | XSS 방어, dangerouslySetInnerHTML, CSRF |
+| 34 | Animations | CSS transitions, Framer Motion |
+| 35 | TypeScript + React | 제네릭 컴포넌트, 이벤트 타입 |
+| 36 | State Machines | XState, 유한 상태 머신 |
+| 37 | Realtime | WebSocket 채팅 UI, Socket.IO |
+| 38 | Design Systems | Storybook, 컴포넌트 API |
+| 39 | PWA | Service Worker, offline, manifest |
+| 40 | Final Project | 할일 관리 앱 전체 통합 |

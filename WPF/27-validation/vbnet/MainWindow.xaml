@@ -1,0 +1,67 @@
+<Window x:Class="Ch27.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Ch27"
+        Title="27 - 유효성 검사" Height="480" Width="560">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel>
+                            <TextBlock Foreground="Red" FontSize="11" DockPanel.Dock="Top"
+                                       Text="{Binding AdornedElement.(Validation.Errors)[0].ErrorContent,
+                                              RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Border BorderBrush="Red" BorderThickness="1">
+                                <AdornedElementPlaceholder/>
+                            </Border>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="유효성 검사: INotifyDataErrorInfo + ValidationRule"
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+
+        <TextBlock Grid.Row="1" Text="이름 (INotifyDataErrorInfo 기반)" FontWeight="Bold"/>
+        <TextBox Grid.Row="2" x:Name="nameBox"
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Grid.Row="3" Text="나이 (ValidationRule 기반, 0~120)" FontWeight="Bold" Margin="0,8,0,0"/>
+        <TextBox Grid.Row="4" x:Name="ageBox">
+            <TextBox.Text>
+                <Binding Path="Age" UpdateSourceTrigger="PropertyChanged"
+                         ValidatesOnNotifyDataErrors="False">
+                    <Binding.ValidationRules>
+                        <local:AgeRangeRule Min="0" Max="120"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="0,12,0,0">
+            <Button Content="저장" Click="Save_Click" Padding="18,8"/>
+            <TextBlock x:Name="resultText" VerticalAlignment="Center" Margin="14,0,0,0"
+                       FontWeight="Bold"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="6" Foreground="Gray" FontSize="11" TextWrapping="Wrap"
+                   VerticalAlignment="Bottom"
+                   Text="이름은 INotifyDataErrorInfo(실시간, 모델 기반), 나이는 ValidationRule(바인딩 전환 검증)로 처리합니다. 잘못된 값을 넣으면 Validation.ErrorTemplate이 자동으로 활성화됩니다."/>
+    </Grid>
+</Window>

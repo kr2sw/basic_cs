@@ -1,6 +1,6 @@
-# Rust 기초 강의 (20개 챕터)
+# Rust 강의 (기초 20개 + 중급 20개 챕터)
 
-Rust 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
+Rust 프로그래밍 언어의 기초부터 중급 개념까지 학습할 수 있는 예제 모음입니다.
 
 ## 역사
 
@@ -46,3 +46,23 @@ cd RUST/01-hello-world && cargo run
 | 18 | Macros | macro_rules!, 선언적 매크로, 절차적 매크로 |
 | 19 | Testing | #[test], assert!, 테스트 모듈, doc 테스트 |
 | 20 | Web Server | 단순 HTTP 서버, TCP 연결, 라우팅, 비동기(async/await) |
+| 21 | 고급 트레잇 | 연관 타입, 제네릭 트레잇, 상속 트레잇, 트레잇 객체 |
+| 22 | 고급 패턴 매칭 | 매치 가드, @바인딩, 구조 분해 심화 |
+| 23 | 반복자 심화 | 어댑터 체인, Iterator 직접 구현 |
+| 24 | 제네릭 심화 | const generics, 고정 길이 배열 |
+| 25 | 에러 처리 패턴 | 커스텀 Error, Result 체이닝, context |
+| 26 | 비동기 | async/await, Future 개념, 폴링 이벤트 루프 |
+| 27 | 네트워킹 | TcpListener/TcpStream, HTTP 요청 개념 |
+| 28 | 웹 프레임워크 | Axum/Actix 개념, 미니 라우터 구현 |
+| 29 | 데이터베이스 | sqlx/Diesel 개념, 파일 기반 저장 |
+| 30 | 직렬화 | serde 개념, 자체 직렬화 구현 |
+| 31 | FFI | extern "C", unsafe, C 바인딩 개념 |
+| 32 | 프로시저 매크로 | derive 매크로 개념, 매크로로 구현 재현 |
+| 33 | Rust + WASM | wasm-bindgen 개념, 내보낼 함수 작성 |
+| 34 | 고급 동시성 | Arc, mpsc channel, AtomicU64 |
+| 35 | 성능 최적화 | 벤치마킹, SIMD 개념, 최적화 |
+| 36 | 임베디드 Rust | no_std, cortex-m 개념, 가상 MCU 시뮬레이션 |
+| 37 | 고급 테스팅 | 속성 테스트(proptest 개념), 벤치마크 |
+| 38 | CLI 애플리케이션 | clap 개념, 인자 파싱 직접 구현 |
+| 39 | 디자인 패턴 | 전략, 옵저버, 빌더 구현 |
+| 40 | 종합 프로젝트 | CLI 할일 관리 앱 (파일 저장) |

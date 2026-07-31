@@ -46,3 +46,23 @@ cd JAVA/01-hello-world && javac Main.java && java Main
 | 18 | Networking | Socket, ServerSocket, InetAddress, URL |
 | 19 | Date & Time | LocalDate, LocalTime, LocalDateTime, DateTimeFormatter |
 | 20 | Testing & Annotations | JUnit, @Test, 어노테이션 정의/사용, Reflection 기초 |
+| 21 | Advanced Collections | 고급 컬렉션, Comparator, groupingBy, parallelStream |
+| 22 | Optional & Functional | Optional 심화, Supplier/BiFunction, 커링 |
+| 23 | Modern Java | record, sealed class, pattern matching, switch 패턴 |
+| 24 | Concurrency & Executors | ExecutorService, CompletableFuture, ForkJoin |
+| 25 | Virtual Threads | 가상 스레드, VirtualThread, StructuredTaskScope |
+| 26 | Memory & GC | JMM, 힙/스택, WeakReference, GC 알고리즘 |
+| 27 | Reflection & Proxy | 리플렉션, Method.invoke, 동적 프록시, InvocationHandler |
+| 28 | Annotations | 커스텀 어노테이션, Retention/Target, 리플렉션 활용 |
+| 29 | JDBC Advanced | 트랜잭션, 배치, DAO/Repository 패턴 |
+| 30 | JPA Basics | 엔티티, 영속성 컨텍스트, JPQL, Hibernate 개념 |
+| 31 | Spring Core | IoC/DI, Bean, AOP 개념 |
+| 32 | Spring Boot | REST 컨트롤러, 계층 구조, 어노테이션 매핑 |
+| 33 | Spring Security | JWT 인증, 인증/인가, 필터 체인 |
+| 34 | Testing Advanced | Mockito, AssertJ 체이닝, 파라미터 테스트 |
+| 35 | Microservices | REST 통신, 서비스 분리, 서킷 브레이커 |
+| 36 | Messaging & Kafka | 프로듀서/컨슈머 패턴, 토픽/파티션, JDK 큐 구현 |
+| 37 | Performance | JMH 개념, 프로파일링, 컬렉션 최적화 |
+| 38 | Build Tools | Maven/Gradle 개념, 디렉터리 구조, 의존성 관리 |
+| 39 | Design Patterns | 싱글턴, 팩토리, 전략, 옵저버 구현 |
+| 40 | Final Project | 콘솔 기반 할일 관리 앱 (종합 프로젝트) |

@@ -45,3 +45,23 @@ cd C/01-hello-world && gcc main.c -o main && ./main
 | 18 | Search | 선형 탐색, 이진 탐색 |
 | 19 | Advanced Pointers | 이중 포인터, 함수 포인터, void 포인터 |
 | 20 | OOP Simulation | 구조체 + 함수 포인터로 OOP 흉내내기 |
+| 21 | Advanced Structs | 비트 필드, union, 열거형 심화, flexible array member |
+| 22 | Function Pointers | 콜백, qsort, 커맨드 테이블, 함수 반환 |
+| 23 | Variadic Functions | stdarg.h, va_list, 안전한 가변 인자 패턴 |
+| 24 | Advanced File I/O | 바이너리, 랜덤 접근(fseek), 버퍼링 |
+| 25 | Trees | 이진 탐색 트리, 순회, AVL 균형 |
+| 26 | Graphs | 인접 리스트/행렬, DFS, BFS, 최단경로 |
+| 27 | Hash Table | 해시 함수, 체이닝, 오픈 어드레싱 |
+| 28 | Dynamic Strings | 문자열 빌더, 토큰화, 정규화 |
+| 29 | Memory Optimization | 메모리 풀, 커스텀 할당자, 캐시 친화적 코드 |
+| 30 | Signals & Errors | errno, strerror, assert, abort |
+| 31 | Processes | fork/exec 개념, exit, 환경 변수 (Windows 참고) |
+| 32 | Threads | pthread 개념, 동기화 (Windows 스레드 참고) |
+| 33 | Sockets | TCP/UDP 클라이언트-서버 (POSIX, 개념 중심) |
+| 34 | Build Systems | Makefile, 컴파일 단계, 정적/동적 라이브러리 |
+| 35 | Embedded C | 레지스터 접근, volatile, ISR, 비트 마스킹 |
+| 36 | Crypto Basics | XOR, 해시 구현, HMAC 개념, 난수 |
+| 37 | Parsers | 토크나이저, 표현식 계산기, 재귀 하강 파서 |
+| 38 | Interop | C ABI, extern "C", Python ctypes 호출 |
+| 39 | Design Patterns in C | 상태 머신, 옵저버, 리소스 풀 |
+| 40 | Final Project | 미니 메모리 기반 DB (파일 저장) |

@@ -1,4 +1,4 @@
-# TypeScript 기초 (20개 챕터)
+# TypeScript 강의 (기초 20개 + 중급 20개 챕터)
 
 TypeScript는 JavaScript에 정적 타입을 추가한 언어로, 대규모 애플리케이션 개발에 적합합니다.
 
@@ -52,3 +52,23 @@ npx ts-node index.ts
 | 18 | Node.js with TS | Express, Request/Response, 미들웨어 |
 | 19 | Testing | jest, ts-jest, typed mock |
 | 20 | Real-world Project | Todo API (Express + TypeScript) |
+| 21 | Advanced Generics | 타입 추론, 제약, infer 패턴 |
+| 22 | Type System Deep | 구조적 타이핑, 공변성/반공변성 |
+| 23 | Conditional & Mapped | 분배 법칙, 재귀 타입, 키 재매핑 |
+| 24 | Template Literals Deep | 문자열 파싱, CamelCase 변환 |
+| 25 | Utility Type Design | Partial, Pick, ReturnType 직접 구현 |
+| 26 | Type-safe APIs | zod 스키마, tRPC 개념, 미니 검증기 |
+| 27 | Decorators Deep | 메서드 데코레이터, DI 컨테이너, 싱글턴 |
+| 28 | Monorepo | 프로젝트 레퍼런스, workspace, 위상 정렬 |
+| 29 | Build Tools | tsc vs esbuild/swc, 증분 빌드, paths |
+| 30 | FP & Pipeline | Option/Either 패턴, pipe, compose |
+| 31 | Express + TS | 타입 안전 라우터, 제네릭 핸들러 |
+| 32 | GraphQL + TS | 스키마, 리졸버, 미니 GraphQL 엔진 |
+| 33 | Testing TS | 테스트 러너, 타입 테스팅(tsd) |
+| 34 | React Generics | 다형성 컴포넌트, 제네릭 훅 |
+| 35 | Node + TS Advanced | 워커, 스트림, 배압(backpressure) |
+| 36 | Type-safe ORM | Prisma/Drizzle 개념, DTO 변환 |
+| 37 | Module Systems | ESM/CJS 상호운용, createRequire |
+| 38 | Package Authoring | .d.ts 배포, SemVer, 의존성 범위 |
+| 39 | Events & State Machines | 이벤트 맵, 타입 안전 FSM |
+| 40 | Final Project | 타입 안전 할일 관리 CLI |

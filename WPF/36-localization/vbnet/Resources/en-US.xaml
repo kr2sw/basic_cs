@@ -1,0 +1,11 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <sys:String x:Key="WindowTitle">36 - Localization (en-US)</sys:String>
+    <sys:String x:Key="LanguageGroup">Language</sys:String>
+    <sys:String x:Key="EnterName">Enter your name</sys:String>
+    <sys:String x:Key="GreetButton">Greet</sys:String>
+    <sys:String x:Key="CultureSampleLabel">Culture-aware display (number · date)</sys:String>
+    <sys:String x:Key="GreetingFormat">Hello, {0}!</sys:String>
+    <sys:String x:Key="Hint">Resource dictionaries are linked via DynamicResource, so switching language redraws instantly. CurrentCulture/CurrentUICulture are also updated so numbers and dates follow the culture format.</sys:String>
+</ResourceDictionary>

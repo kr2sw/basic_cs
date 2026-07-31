@@ -46,3 +46,23 @@ cd NODEJS/01-introduction && node index.js
 | 18 | Streams | Readable/Writable/Transform, pipe, backpressure |
 | 19 | Testing | Jest, Supertest, 단위/통합/E2E 테스트 |
 | 20 | Deployment | PM2, Docker, 환경별 배포, CI/CD |
+| 21 | Express Advanced | 라우터 모듈화, 미들웨어 패턴, 오류 미들웨어 |
+| 22 | Event Emitter | EventEmitter, 커스텀 이벤트, once |
+| 23 | Design Patterns | 싱글턴, 팩토리, 의존성 주입 컨테이너 |
+| 24 | MongoDB & Mongoose | 문서 모델, 스키마, CRUD 개념 |
+| 25 | Redis | 캐시, pub/sub 개념 |
+| 26 | Advanced REST API | 검증, 에러 응답, 버저닝 패턴 |
+| 27 | GraphQL | 스키마, 리졸버 개념 |
+| 28 | WebSocket Advanced | Socket.IO 개념, 실시간 채팅 구조 |
+| 29 | Advanced Auth | JWT, 리프레시 토큰, OAuth2 개념 |
+| 30 | Authorization | RBAC, ACL 권한 관리 |
+| 31 | Security | helmet, rate limiting, 입력 검증, crypto |
+| 32 | Advanced Testing | node:test, assert 테스트 구조 |
+| 33 | Clustering | cluster, worker_threads, 로드 밸런싱 |
+| 34 | Observability | 로깅, 요청 추적, 성능 메트릭 |
+| 35 | Docker | Dockerfile, compose 개념 |
+| 36 | Microservices | 서비스 분리, HTTP 통신, health check |
+| 37 | Queues & Jobs | BullMQ 개념, core 기반 큐 구현 |
+| 38 | TypeScript + Node | 타입 안전 서버 구조 |
+| 39 | Advanced Streams | 파이프라인, backpressure, transform |
+| 40 | Final Project | CLI 작업 관리 도구 |

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 벌크 메모리</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>벌크 메모리 데모</h1>
+  <button onclick="fillZero()">fillZero(0, 32)</button>
+  <button onclick="fillPattern()">fillPattern(0, 0xAA, 16)</button>
+  <button onclick="loadMsg()">loadMsg(0) — 수동 세그먼트 복사</button>
+  <button onclick="copyBlock()">copyBlock(32, 0, 20)</button>
+  <button onclick="buildMessage()">buildMessage(64)</button>
+  <pre id="view"></pre>
+  <div id="log"></div>
+
+  <script>
+    const viewEl = document.getElementById('view');
+    const logEl = document.getElementById('log');
+    let exports = null;
+    let memory = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('bulk.wasm'));
+      exports = instance.exports;
+      memory = exports.memory;
+      refresh();
+    }
+
+    function refresh() {
+      const bytes = new Uint8Array(memory.buffer, 0, 96);
+      let lines = [];
+      for (let i = 0; i < bytes.length; i += 16) {
+        const hex = Array.from(bytes.slice(i, i + 16))
+          .map(b => b.toString(16).padStart(2, '0')).join(' ');
+        const asc = Array.from(bytes.slice(i, i + 16))
+          .map(b => (b >= 32 && b < 127) ? String.fromCharCode(b) : '.')
+          .join('');
+        lines.push(`${i.toString(16).padStart(4, '0')}  ${hex.padEnd(48)}  ${asc}`);
+      }
+      viewEl.textContent = lines.join('\n');
+    }
+
+    function log(msg) { logEl.textContent = msg; }
+
+    async function fillZero() { exports.fillZero(0, 32); log('fillZero(0, 32) 실행'); refresh(); }
+    async function fillPattern() { exports.fillPattern(0, 0xAA, 16); log('fillPattern(0, 0xAA, 16) 실행'); refresh(); }
+    async function loadMsg() { exports.loadMsg(0); log('loadMsg(0) 실행'); refresh(); }
+    async function copyBlock() { exports.copyBlock(32, 0, 20); log('copyBlock(32, 0, 20) 실행'); refresh(); }
+    async function buildMessage() {
+      const len = exports.buildMessage(64);
+      const view = new Uint8Array(memory.buffer, 64, len);
+      const text = new TextDecoder().decode(view);
+      log(`buildMessage(64): "${text}" (${len}바이트)`);
+      refresh();
+    }
+
+    init().catch(console.error);
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+package example:add;
+
+/// 간단한 계산기 컴포넌트의 공개 인터페이스
+world calculator {
+  /// 두 수를 더한다
+  export add: func(a: u32, b: u32) -> u32;
+
+  /// 두 수를 뺀다 (a가 더 커야 안전)
+  export sub: func(a: u32, b: u32) -> u32;
+
+  /// 인사말 문자열을 만든다
+  export greet: func(name: string) -> string;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 다중값</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>다중값 &amp; 다중 메모리</h1>
+  <button onclick="divmod()">divmod(17, 5)</button>
+  <button onclick="minmax()">minmax(3, 7)</button>
+  <button onclick="addVec()">addVec(1,2, 10,20)</button>
+  <button onclick="parity()">splitByParity(6) / (7)</button>
+  <button onclick="aux()">보조 메모리 읽기/쓰기</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    let exports = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('multi.wasm'));
+      exports = instance.exports;
+    }
+
+    function print(m) {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    }
+
+    function divmod() {
+      const [q, r] = exports.divmod(17, 5);
+      print(`divmod(17, 5) = [${q}, ${r}]`);
+    }
+
+    function minmax() {
+      const [mn, mx] = exports.minmax(3, 7);
+      print(`minmax(3, 7) = [${mn}, ${mx}]`);
+    }
+
+    function addVec() {
+      const [x, y] = exports.addVec(1, 2, 10, 20);
+      print(`addVec(1,2, 10,20) = (${x}, ${y})`);
+    }
+
+    function parity() {
+      const [a1, b1] = exports.splitByParity(6);
+      const [a2, b2] = exports.splitByParity(7);
+      print(`splitByParity(6) = [${a1}, ${b1}], splitByParity(7) = [${a2}, ${b2}]`);
+    }
+
+    function aux() {
+      exports.auxWrite(0, 42);
+      print(`auxRead(0) = ${exports.auxRead(0)}`);
+      const [main, aux] = exports.sizes();
+      print(`메모리 크기: main=${main} 페이지, aux=${aux} 페이지`);
+      const auxBytes = new Uint8Array(exports.aux.buffer);
+      const text = new TextDecoder().decode(auxBytes.subarray(0, 10));
+      print(`보조 메모리 초기 데이터: "${text}"`);
+    }
+
+    init().catch(console.error);
+  </script>
+</body>
+</html>

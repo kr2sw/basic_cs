@@ -1,0 +1,33 @@
+<Window x:Class="Ch25.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Ch25"
+        Title="25 - 비헤이비어 (Behavior)" Height="420" Width="520">
+    <StackPanel Margin="24">
+        <TextBlock Text="비헤이비어: 요소에 재사용 동작 주입" FontSize="20" FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+        <TextBlock Text="검색어를 입력하고 Enter를 누르거나, 포커스가 이미 있으면 다시 클릭해 보세요."
+                   Foreground="Gray" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+
+        <!-- 두 가지 비헤이비어를 동시에 부착 -->
+        <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="0,24,0,0" Padding="6" FontSize="14">
+            <local:Behaviors.Behaviors>
+                <local:SelectAllOnFocusBehavior/>
+                <local:PressEnterCommandBehavior Command="{Binding SearchCommand}"/>
+            </local:Behaviors.Behaviors>
+        </TextBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="검색" Command="{Binding SearchCommand}" Padding="16,8"/>
+        </StackPanel>
+
+        <Border Background="#FFF7F7F7" BorderBrush="LightGray" BorderThickness="1"
+                Padding="12" Margin="0,16,0,0">
+            <TextBlock Text="{Binding Result}" FontSize="14" FontWeight="Bold"/>
+        </Border>
+
+        <TextBlock Foreground="Gray" FontSize="11" TextWrapping="Wrap" Margin="0,16,0,0"
+                   Text="SelectAllOnFocusBehavior: 포커스를 받으면 전체 선택. PressEnterCommandBehavior: Enter 키를 누르면 Command 실행. 비헤이비어가 없는 컨트롤에는 코드를 바꾸지 않고도 동작을 추가할 수 있습니다."/>
+    </StackPanel>
+</Window>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 예외 처리</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>예외 처리: try / catch / tag</h1>
+  <button onclick="safeDiv(10, 2)">safeDiv(10, 2)</button>
+  <button onclick="safeDiv(10, 0)">safeDiv(10, 0) — 예외</button>
+  <button onclick="safeGet(3, 4)">safeGet(3, 4)</button>
+  <button onclick="safeGet(9, 4)">safeGet(9, 4) — 예외</button>
+  <button onclick="nestedDiv(8, 0)">nestedDiv(8, 0) — delegate</button>
+  <button onclick="panic()">panic() — JS로 전달</button>
+  <button onclick="describe(5, 10)">describe(5, 10)</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    let exports = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('exceptions.wasm'));
+      exports = instance.exports;
+    }
+
+    function print(m) {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    }
+
+    async function safeDiv(a, b) {
+      print(`safeDiv(${a}, ${b}) = ${exports.safeDiv(a, b)}`);
+    }
+    async function safeGet(i, len) {
+      print(`safeGet(${i}, ${len}) = ${exports.safeGet(i, len)}`);
+    }
+    async function nestedDiv(a, b) {
+      print(`nestedDiv(${a}, ${b}) = ${exports.nestedDiv(a, b)}`);
+    }
+    async function describe(i, len) {
+      print(`describe(${i}, ${len}) = ${exports.describe(i, len)}`);
+    }
+    async function panic() {
+      try {
+        exports.panic();
+        print('panic(): 예외 없이 반환?!');
+      } catch (e) {
+        const isWasmExc = typeof WebAssembly !== 'undefined' && e instanceof WebAssembly.Exception;
+        print(`panic(): JS에서 잡음 (WebAssembly.Exception=${isWasmExc}, message=${e.message})`);
+      }
+    }
+
+    init().catch(e => print('예외 처리 미지원 환경: ' + e));
+  </script>
+</body>
+</html>

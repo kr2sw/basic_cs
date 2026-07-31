@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 스레드와 아토믹</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+    .warn { color: #b00; }
+  </style>
+</head>
+<body>
+  <h1>스레드와 아토믹 연산</h1>
+  <div id="iso" class="warn"></div>
+  <button id="atomicBtn">원자적 증가 (워커 2개)</button>
+  <button id="naiveBtn">비원자 증가 (워커 2개, 데이터 레이스)</button>
+  <button id="waitBtn">wait/notify 데모</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    const ITER = 200000;   // 워커당 증가 횟수
+    let module = null;
+    let memory = null;
+
+    function print(m) {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    }
+
+    async function init() {
+      const iso = document.getElementById('iso');
+      if (typeof crossOriginIsolated === 'boolean' && !crossOriginIsolated) {
+        iso.textContent =
+          '⚠ 교차 출처 격리(COOP/COEP)가 아니어서 SharedArrayBuffer가 제한될 수 있습니다. ' +
+          '서버가 Cross-Origin-Opener-Policy: same-origin, ' +
+          'Cross-Origin-Embedder-Policy: require-corp 헤더를 설정해야 워커 데모가 동작합니다.';
+      }
+
+      memory = new WebAssembly.Memory({ initial: 1, maximum: 2, shared: true });
+
+      const bytes = await (await fetch('atomic.wasm')).arrayBuffer();
+      module = await WebAssembly.compile(bytes);
+
+      const { instance } = await WebAssembly.instantiate(module, { env: { memory } });
+      instance.exports.store(0, 0);   // 카운터 초기화
+      print('준비 완료 (공유 메모리 1페이지, 워커당 증가 횟수 ' + ITER.toLocaleString() + ')');
+    }
+
+    function spawnWorkers(atomic) {
+      const workers = [];
+      for (let i = 0; i < 2; i++) {
+        const w = new Worker('worker.js');
+        w.postMessage({ action: 'init', module, memory, iterations: ITER });
+        workers.push(w);
+      }
+      return new Promise((resolve) => {
+        let ready = 0, done = 0;
+        let elapsed = [];
+        workers.forEach(w => {
+          w.onmessage = (e) => {
+            if (e.data.type === 'ready') ready++;
+            if (e.data.type === 'done') {
+              done++; elapsed.push(e.data.elapsed);
+              if (done === 2) {
+                const view = new Int32Array(memory.buffer);
+                resolve({ total: view[0], elapsed });
+                workers.forEach(w => w.terminate());
+              }
+            }
+          };
+        });
+      });
+    }
+
+    async function runRace(atomic) {
+      new Int32Array(memory.buffer)[0] = 0;   // 카운터 리셋
+      const label = atomic ? '원자적' : '비원자';
+      const { total, elapsed } = await spawnWorkers(atomic);
+      const expected = ITER * 2;
+      const ok = total === expected;
+      print(`[${label}] 최종 카운터=${total.toLocaleString()}, 기대값=${expected.toLocaleString()} → ${ok ? '✅ 일치' : '❌ 손실 발생 (레이스!)'} ` +
+            `(시간: ${elapsed.map(t => t.toFixed(1) + 'ms').join(', ')})`);
+    }
+
+    async function waitNotifyDemo() {
+      new Int32Array(memory.buffer)[1] = 0;   // 주소 4
+      const w = new Worker('worker.js');
+      w.postMessage({ action: 'init', module, memory, iterations: 1 });
+      w.onmessage = (e) => {
+        if (e.data.type === 'ready') {
+          w.postMessage({ action: 'wait' });
+        } else if (e.data.type === 'woke') {
+          print(`워커가 깨어남 (i32.atomic.wait 반환값 ${e.data.r})`);
+          w.terminate();
+        }
+      };
+      // 워커가 대기 상태에 들어가도록 잠시 후 notify
+      setTimeout(() => {
+        const n = new WebAssembly.Instance(module, { env: { memory } }).exports.notifyOne(4);
+        print(`메인 스레드가 notifyOne 호출, 깨어난 스레드 ${n}개`);
+      }, 500);
+    }
+
+    document.getElementById('atomicBtn').onclick = () => runRace(true);
+    document.getElementById('naiveBtn').onclick = () => runRace(false);
+    document.getElementById('waitBtn').onclick = waitNotifyDemo;
+
+    init().catch(e => print('초기화 실패: ' + e));
+  </script>
+</body>
+</html>

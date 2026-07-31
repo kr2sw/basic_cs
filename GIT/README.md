@@ -1,4 +1,4 @@
-# Git & GitHub 완벽 강좌
+# Git & GitHub 완벽 강좌 (기초 20개 + 중급 20개 챕터)
 
 ## Git이란?
 
@@ -57,3 +57,23 @@ Git은 2005년 리누스 토르발스가 Linux 커널 개발을 위해 만든 �
 | 18 | 고급 기능 | submodule, worktree, bisect |
 | 19 | .gitignore와 보안 | 보안, 민감 정보 관리 |
 | 20 | 실전 프로젝트 | 전체 워크플로 실습 |
+| 21 | 브랜치 전략 | trunk-based, GitFlow, feature branch |
+| 22 | Actions 워크플로우 | 워크플로우, 이벤트, 잡 구조 |
+| 23 | Actions 고급 | 매트릭스 빌드, 재사용 워크플로우 |
+| 24 | Actions 배포 | environments, secrets, 승인 |
+| 25 | Git 훅 | pre-commit, commit-msg, 커스텀 훅 |
+| 26 | Git 내부 | objects, refs, HEAD, packfiles |
+| 27 | 고급 리베이스 | rerere, autosquash, fixup |
+| 28 | bisect 디버깅 | 이진 탐색, 자동 실행 |
+| 29 | 서브모듈 | submodule, subtree |
+| 30 | 워크트리 | 병렬 작업, 컨텍스트 전환 |
+| 31 | 히스토리 편집 | filter-branch, filter-repo |
+| 32 | CI/CD 설계 | 파이프라인, 게이트, 아티팩트 |
+| 33 | GitHub API | gh CLI, REST API, 자동화 |
+| 34 | 팀 워크플로 | 보호된 브랜치, 코드 리뷰 |
+| 35 | 릴리즈 엔지니어링 | SemVer, changelog, 태그 |
+| 36 | Git 보안 | 서명 커밋, 시크릿 스캔 |
+| 37 | 모노레포 | 전략, 툴, 경로 제한 |
+| 38 | Git 성능 | LFS, shallow, partial clone |
+| 39 | 멀티레포 | 저장소 간 자동화 |
+| 40 | 실전 프로젝트 | CI/CD 전체 파이프라인 |

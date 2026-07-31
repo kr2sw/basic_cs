@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>AssemblyScript 심화</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>AssemblyScript 메모리 관리</h1>
+  <p>빌드: <code>npm install && npm run build</code></p>
+  <button onclick="ptrDemo()">write/read 포인터 데모</button>
+  <button onclick="counterDemo()">객체를 포인터로 (Counter)</button>
+  <button onclick="utf8Demo()">UTF-8 인코딩/디코딩</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    const print = (m) => {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    };
+
+    let e = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('build/module.wasm'));
+      e = instance.exports;
+      print('모듈 로드 완료 (exportRuntime 포함)');
+    }
+
+    function ptrDemo() {
+      const ptr = e.alloc(64);
+      e.write(ptr, 12345);
+      const back = e.read(ptr);
+      print(`alloc(64) → 주소 ${ptr}, write(ptr, 12345) → read(ptr) = ${back}`);
+    }
+
+    function counterDemo() {
+      const ptr = e.makeCounter();
+      print(`makeCounter() → 주소 ${ptr}`);
+      for (let i = 0; i < 3; i++) {
+        print(`bump(ptr) = ${e.bump(ptr)}`);
+      }
+    }
+
+    function utf8Demo() {
+      const text = '안녕, AssemblyScript!';
+      const ptr = e.encodeUtf8(text);
+      const len = e.utf8ByteLength(text);
+      // 주소와 길이를 받아 WASM 메모리에서 직접 바이트 읽기
+      const bytes = new Uint8Array(e.memory.buffer, ptr, len);
+      const decoded = new TextDecoder().decode(bytes);
+      print(`encodeUtf8 → ${bytes.length}바이트: ${Array.from(bytes).join(' ')}`);
+      print(`TextDecoder로 복원 → "${decoded}" (일치=${decoded === text})`);
+    }
+
+    window.ptrDemo = ptrDemo;
+    window.counterDemo = counterDemo;
+    window.utf8Demo = utf8Demo;
+
+    init().catch(console.error);
+  </script>
+</body>
+</html>

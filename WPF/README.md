@@ -56,6 +56,26 @@ WPF(Windows Presentation Foundation)는 Microsoft가 .NET Framework의 일부로
 | 18 | 애니메이션 | Storyboard, DoubleAnimation, ColorAnimation |
 | 19 | 스타일 및 테마 | ResourceDictionary, 테마 전환 |
 | 20 | 배포 | ClickOnce, 단일 파일 게시 |
+| 21 | MVVM 심화 | Messenger, Mediator 패턴 |
+| 22 | 고급 데이터 바인딩 | MultiBinding, PriorityBinding, UpdateSourceTrigger |
+| 23 | 커스텀 컨트롤 | ControlTemplate, parts, ThemeInfo |
+| 24 | 첨부 속성 | AttachedProperty, 컨테이너별 값 |
+| 25 | 비헤이비어 | Behavior/TriggerAction 개념 |
+| 26 | 비동기 커맨드 | AsyncRelayCommand, 취소 |
+| 27 | 유효성 검사 | IDataErrorInfo, INotifyDataErrorInfo, ValidationRule |
+| 28 | 컨버터 | IValueConverter, MultiValueConverter, Parameter |
+| 29 | DataGrid 고급 | 편집, 그룹핑, 열 템플릿 |
+| 30 | 가상화와 성능 | VirtualizingStackPanel, 병렬 디자인 |
+| 31 | 동적 리소스와 테마 | ResourceDictionary, 다크/라이트 테마 |
+| 32 | 대화상자 프레임워크 | 커스텀 다이얼로그, MVVM 친화적 |
+| 33 | 고급 내비게이션 | Frame/Page, MVVM 내비게이션 |
+| 34 | 멀티스레딩 심화 | TPL Dataflow, async/await UI |
+| 35 | 의존성 주입 | DI 컨테이너, MVVM 결합 |
+| 36 | 지역화 | 리소스, CultureInfo, 다국어 |
+| 37 | 커스텀 패널 | MeasureOverride/ArrangeOverride |
+| 38 | 미디어와 그래픽 | DrawingVisual, RenderTargetBitmap, 효과 |
+| 39 | WPF 테스팅 | MVVM 단위 테스트, UI 자동화 개념 |
+| 40 | 종합 프로젝트 | MVVM + DI + 테마의 완성된 앱 |
 
 ## 시작하기
 

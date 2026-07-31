@@ -1,4 +1,4 @@
-# C# 기초 강의 (20개 챕터)
+# C# 강의 (기초 20개 + 중급 20개 챕터)
 
 C#(C Sharp) 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
 
@@ -46,3 +46,23 @@ cd CS/01_hello_world && dotnet run --project Ch01_HelloWorld.csproj
 | 18 | Reflection & Attributes | Attribute, Reflection, 사용자 정의 Attribute |
 | 19 | Networking | HttpClient, Socket, TCP/UDP |
 | 20 | Unit Testing | xUnit/NUnit, Assert, Mock, TDD |
+| 21 | Advanced LINQ | Expression 트리, 커스텀 연산자, GroupJoin |
+| 22 | Dependency Injection | 수동 DI 컨테이너, 생성자 주입, 생명주기 |
+| 23 | Entity Framework | ORM 개념, 엔티티, 인메모리 리포지토리 |
+| 24 | Advanced Async | ValueTask, IAsyncEnumerable, CancellationToken |
+| 25 | Records & Pattern Matching | positional record, with, property pattern |
+| 26 | Source Generators | partial, Incremental Generator 개념 |
+| 27 | Span & Memory | 저할당 코드, 슬라이싱, Memory<T> |
+| 28 | Performance | Stopwatch 벤치마크, 컬렉션 선택 |
+| 29 | Minimal API | ASP.NET Core 라우팅, 필터 개념 |
+| 30 | gRPC | 프로토콜, proto 파일, 스트리밍 |
+| 31 | SignalR | 허브 개념, 그룹, 실시간 통신 |
+| 32 | Caching | IMemoryCache 개념, LRU 구현 |
+| 33 | Logging | Serilog 개념, 커스텀 로거 |
+| 34 | Background Services | IHostedService, Channel 큐 |
+| 35 | Microservices | HTTP 통신, 서비스 레지스트리 패턴 |
+| 36 | Memory Management | IDisposable, using, GC 개념 |
+| 37 | Advanced Collections | 불변 컬렉션, Channel, PriorityQueue |
+| 38 | Functional C# | Option/Either, 파이프라인 |
+| 39 | Native Interop | P/Invoke, DllImport, 마샬링 |
+| 40 | Final Project | 콘솔 할일 관리 앱 (파일 저장) |

@@ -1,0 +1,7 @@
+name = "edge-add"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# wasm 파일을 ES 모듈로 등록
+[wasm_modules]
+add = "./add.wasm"

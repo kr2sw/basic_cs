@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 성능 벤치마크</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>성능 벤치마크</h1>
+  <button onclick="benchFib()">fib(30) WASM vs JS</button>
+  <button onclick="benchPrimes()">소수 5만 개까지 WASM vs JS</button>
+  <button onclick="benchSum()">40만 개 합계 WASM vs JS</button>
+  <button onclick="benchAll()">모두 실행</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    const print = (m) => {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    };
+    let exports = null;
+    let memory = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('bench.wasm'));
+      exports = instance.exports;
+      memory = exports.memory;
+      print('WASM 모듈 로드 완료');
+    }
+
+    // N회 반복 후 평균
+    function measure(fn, reps) {
+      fn(); // 워밍업
+      const t0 = performance.now();
+      for (let i = 0; i < reps; i++) fn();
+      return (performance.now() - t0) / reps;
+    }
+
+    function jsFib(n) {
+      if (n <= 1) return n;
+      return jsFib(n - 1) + jsFib(n - 2);
+    }
+
+    function jsCountPrimes(limit) {
+      let count = 0;
+      for (let n = 2; n <= limit; n++) {
+        let prime = true;
+        for (let d = 2; d * d <= n; d++) {
+          if (n % d === 0) { prime = false; break; }
+        }
+        if (prime) count++;
+      }
+      return count;
+    }
+
+    function benchFib() {
+      const wasmMs = measure(() => exports.fib(30), 5);
+      const jsMs = measure(() => jsFib(30), 5);
+      print(`fib(30): WASM ${wasmMs.toFixed(2)}ms, JS ${jsMs.toFixed(2)}ms → ${(jsMs/wasmMs).toFixed(1)}배`);
+    }
+
+    function benchPrimes() {
+      const wasmMs = measure(() => exports.countPrimes(50000), 3);
+      const jsMs = measure(() => jsCountPrimes(50000), 3);
+      print(`소수(${50000}): WASM ${wasmMs.toFixed(2)}ms, JS ${jsMs.toFixed(2)}ms → ${(jsMs/wasmMs).toFixed(1)}배`);
+    }
+
+    function benchSum() {
+      const N = 400000;
+      const view = new Int32Array(memory.buffer, 0, N);
+      for (let i = 0; i < N; i++) view[i] = i;
+      const wasmMs = measure(() => exports.sumArray(0, N * 4), 10);
+      const jsMs = measure(() => view.reduce((a, b) => a + b, 0), 10);
+      print(`합계(${N}): WASM ${wasmMs.toFixed(2)}ms, JS ${jsMs.toFixed(2)}ms → ${(jsMs/wasmMs).toFixed(1)}배`);
+    }
+
+    function benchAll() { benchFib(); benchPrimes(); benchSum(); }
+
+    window.benchFib = benchFib;
+    window.benchPrimes = benchPrimes;
+    window.benchSum = benchSum;
+    window.benchAll = benchAll;
+
+    init().catch(console.error);
+  </script>
+</body>
+</html>

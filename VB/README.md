@@ -46,3 +46,23 @@ cd VB/01-hello-world && dotnet run
 | 18 | Database | ADO.NET, SqlConnection, SqlCommand |
 | 19 | Reflection & Attributes | Attribute, Reflection, CallByName |
 | 20 | Unit Testing | MSTest, Assert, DataRow, TestInitialize |
+| 21 | Advanced OOP | 제네릭 심화, 중첩 타입, 이벤트 상속 |
+| 22 | Advanced LINQ | GroupJoin, Aggregate, Expression 트리 |
+| 23 | Advanced Async | ValueTask, IAsyncEnumerable, Progress(Of T) |
+| 24 | ADO.NET Advanced | DataAdapter, DataSet, 트랜잭션 |
+| 25 | Entity Framework | DbContext, Code First, 마이그레이션 |
+| 26 | WPF + MVVM | MVVM 패턴, INotifyPropertyChanged |
+| 27 | WinForms Advanced | 사용자 컨트롤, 데이터 바인딩 |
+| 28 | Design Patterns | 싱글턴, 팩토리, 전략, 옵저버 |
+| 29 | COM Interop | COM 인터페이스, Marshal, P/Invoke |
+| 30 | XML/JSON Advanced | LINQ to XML, System.Text.Json |
+| 31 | Networking | TcpClient/Listener, HttpClient |
+| 32 | Parallel | Parallel.For, PLINQ, 동기화 |
+| 33 | Generics Advanced | 제약 조건, 공변성/반공변성 |
+| 34 | Extension & Partial | 확장 메서드, Partial 클래스 |
+| 35 | Reflection Advanced | Type, Activator, 동적 호출 |
+| 36 | Performance | StringBuilder, 컬렉션 튜닝, GC |
+| 37 | Testing Advanced | xUnit/NUnit 개념, mock, 파라미터 테스트 |
+| 38 | Localization | 리소스 파일, CultureInfo, 다국어 |
+| 39 | Windows Services | ServiceBase 개념, 설치 |
+| 40 | Final Project | 콘솔 할일 관리 앱 (파일 저장) |

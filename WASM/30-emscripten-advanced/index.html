@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Emscripten 고급: pthreads</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; min-height: 60px; }
+    .warn { color: #b00; }
+  </style>
+</head>
+<body>
+  <h1>Emscripten pthreads</h1>
+  <div class="warn" id="iso"></div>
+  <p><code>emcc pthreads.c -o pthreads.js -pthread -sPTHREAD_POOL_SIZE=4 -O3</code>로 컴파일 필요.</p>
+  <button onclick="Module._runThreads()">스레드 4개 실행</button>
+  <button onclick="Module._countPrimes(200000)">소수 세기 (CPU 작업)</button>
+  <pre id="out"></pre>
+
+  <script>
+    // 모듈 로드 전에 print를 재정의합니다 (화면 출력 표시용)
+    var Module = {
+      print: (text) => {
+        const el = document.getElementById('out');
+        el.textContent += (el.textContent ? '\n' : '') + text;
+      },
+      printErr: (text) => console.error(text)
+    };
+  </script>
+  <script src="pthreads.js"></script>
+  <script>
+    if (typeof crossOriginIsolated === 'boolean' && !crossOriginIsolated) {
+      document.getElementById('iso').textContent =
+        '⚠ -pthread 빌드는 SharedArrayBuffer가 필요합니다. ' +
+        '서버에 COOP/COEP 헤더를 설정하세요 (Cross-Origin-Opener-Policy: same-origin / ' +
+        'Cross-Origin-Embedder-Policy: require-corp).';
+    }
+  </script>
+</body>
+</html>

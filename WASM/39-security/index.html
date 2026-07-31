@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 보안 데모</title>
+  <!-- 데모용: 인라인 스크립트 허용. 운영 환경에서는 'unsafe-inline' 제거 필요 -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'">
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>보안: 샌드박스 &amp; 메모리 안전</h1>
+  <button onclick="safeRead()">readSafe(3) — 안전 접근</button>
+  <button onclick="safeReadBad()">readSafe(10) — 명시적 거부</button>
+  <button onclick="oobRead()">readByte(99999) — 범위 밖 (트랩)</button>
+  <button onclick="oobWrite()">writeByte(99999, 1) — 범위 밖 쓰기</button>
+  <button onclick="grow()">grow(2) — 확장 후 재접근</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    const print = (m) => {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    };
+    let exports = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('sandbox.wasm'));
+      exports = instance.exports;
+      print(`로드 완료. 초기 크기: ${exports.size()}페이지 (${exports.size() * 65536}바이트)`);
+    }
+
+    function safeRead() { print(`readSafe(3) = ${exports.readSafe(3)}`); }
+    function safeReadBad() { print(`readSafe(10) = ${exports.readSafe(10)} (명시적 -1 거부)`); }
+
+    function oobRead() {
+      try {
+        print(`readByte(99999) = ${exports.readByte(99999)}`);
+      } catch (e) {
+        print(`트랩: ${e.message}`);
+      }
+    }
+
+    function oobWrite() {
+      try {
+        exports.writeByte(99999, 1);
+        print('쓰기 성공?! (예상 외)');
+      } catch (e) {
+        print(`트랩: ${e.message}`);
+      }
+    }
+
+    function grow() {
+      const old = exports.size();
+      const r = exports.grow(2);
+      print(`grow(2): 이전=${r}페이지, 현재=${exports.size()}페이지 (${exports.size() * 65536}바이트)`);
+      print(`확장 후 readByte(100000) = ${exports.readByte(100000)} (이제 유효)`);
+    }
+
+    window.safeRead = safeRead;
+    window.safeReadBad = safeReadBad;
+    window.oobRead = oobRead;
+    window.oobWrite = oobWrite;
+    window.grow = grow;
+
+    init().catch(console.error);
+  </script>
+</body>
+</html>

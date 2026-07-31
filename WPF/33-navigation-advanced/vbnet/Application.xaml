@@ -1,0 +1,30 @@
+<Application x:Class="Ch33.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Ch33"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type local:HomeViewModel}">
+            <StackPanel Margin="24">
+                <TextBlock Text="홈 페이지" FontSize="22" FontWeight="Bold"/>
+                <TextBlock Text="Frame + Page 기반 MVVM 내비게이션"
+                           Foreground="Gray" Margin="0,8,0,0"/>
+                <TextBlock Text="{Binding Greeting}" FontSize="16" Margin="0,20,0,0"
+                           Foreground="SteelBlue"/>
+                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type local:SettingsViewModel}">
+            <StackPanel Margin="24" Width="380">
+                <TextBlock Text="설정" FontSize="22" FontWeight="Bold"/>
+                <TextBlock Text="이름" FontWeight="Bold" Margin="0,16,0,4"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="볼륨" FontWeight="Bold" Margin="0,16,0,4"/>
+                <Slider Minimum="0" Maximum="100" Value="{Binding Volume}"/>
+                <TextBlock Text="{Binding Volume, StringFormat=현재 볼륨: {0}}" Margin="0,6,0,0"
+                           Foreground="SteelBlue" FontWeight="Bold"/>
+            </StackPanel>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,27 @@
+<Window x:Class="Ch23.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Ch23"
+        Title="23 - 커스텀 컨트롤" Height="380" Width="420">
+    <StackPanel Margin="24">
+        <TextBlock Text="커스텀 컨트롤 (StarRatingControl)" FontSize="20" FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+        <TextBlock Text="별을 클릭해 점수를 매겨보세요." Foreground="Gray"
+                   HorizontalAlignment="Center" Margin="0,4,0,0"/>
+
+        <!-- 기본 템플릿이 자동 적용됩니다 (Themes/Generic.xaml) -->
+        <local:StarRatingControl x:Name="rating1" Margin="0,24,0,0"/>
+
+        <TextBlock Text="초기값을 4점으로 지정한 예제" Foreground="Gray" Margin="0,16,0,0"/>
+        <local:StarRatingControl x:Name="rating2" Rating="4" Margin="0,4,0,0"/>
+
+        <!-- DependencyProperty 바인딩으로 상태 연동 -->
+        <TextBlock Text="{Binding ElementName=rating1, Path=Rating, StringFormat=첫 번째 별점: {0}점}"
+                   Margin="0,16,0,0" FontWeight="Bold"/>
+        <TextBlock Text="{Binding ElementName=rating2, Path=Rating, StringFormat=두 번째 별점: {0}점}"
+                   Margin="0,6,0,0" FontWeight="Bold"/>
+
+        <TextBlock Text="Control + ControlTemplate + ThemeInfo 구조를 가진 재사용 가능한 컨트롤입니다."
+                   Foreground="Gray" FontSize="11" TextWrapping="Wrap" Margin="0,20,0,0"/>
+    </StackPanel>
+</Window>

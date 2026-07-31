@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 테이블과 간접 호출</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    .result { margin-top: 20px; font-size: 1.2em; }
+  </style>
+</head>
+<body>
+  <h1>테이블 &amp; call_indirect</h1>
+  <p>a = <input id="a" type="number" value="10" size="4"></p>
+  <p>b = <input id="b" type="number" value="4" size="4"></p>
+  <p>연산 선택 (테이블 인덱스):</p>
+  <button onclick="compute(0)">0: 덧셈</button>
+  <button onclick="compute(1)">1: 뺄셈</button>
+  <button onclick="compute(2)">2: 곱셈</button>
+  <button onclick="compute(3)">3: 나눗셈</button>
+  <button onclick="compute(4)">4: 범위 밖(트랩)</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    const resultEl = document.getElementById('result');
+    let exports = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('table.wasm'));
+      exports = instance.exports;
+    }
+
+    function compute(index) {
+      const a = parseInt(document.getElementById('a').value, 10);
+      const b = parseInt(document.getElementById('b').value, 10);
+      try {
+        const value = exports.compute(a, b, index);
+        resultEl.textContent = `compute(${a}, ${b}, 인덱스 ${index}) = ${value}`;
+      } catch (e) {
+        resultEl.textContent = `인덱스 ${index}: 트랩 발생! (${e})`;
+      }
+    }
+
+    init().catch(console.error);
+  </script>
+</body>
+</html>

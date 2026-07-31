@@ -1,0 +1,54 @@
+<Window x:Class="Ch21.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="21 - MVVM 심화: Messenger 패턴" Height="460" Width="640">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Messenger 기반 ViewModel 통신" FontSize="20"
+                   FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 보내는 쪽 ViewModel -->
+            <Border Grid.Column="0" BorderBrush="SteelBlue" BorderThickness="2"
+                    CornerRadius="6" Padding="12">
+                <StackPanel>
+                    <TextBlock Text="보내는 쪽 (SenderViewModel)" FontWeight="Bold"
+                               Foreground="SteelBlue"/>
+                    <TextBox Text="{Binding Sender.MessageText}" Margin="0,8,0,0" Padding="5"
+                             MinHeight="70" AcceptsReturn="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+                    <Button Content="메시지 보내기" Command="{Binding Sender.SendCommand}"
+                            Margin="0,10,0,0" Padding="12,6" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Border>
+
+            <!-- 받는 쪽 ViewModel -->
+            <Border Grid.Column="2" BorderBrush="ForestGreen" BorderThickness="2"
+                    CornerRadius="6" Padding="12">
+                <StackPanel>
+                    <TextBlock Text="받는 쪽 (ReceiverViewModel)" FontWeight="Bold"
+                               Foreground="ForestGreen"/>
+                    <TextBlock Text="{Binding Receiver.Received}" Margin="0,8,0,0"
+                               FontSize="14" TextWrapping="Wrap" MinHeight="90"/>
+                    <TextBlock Text="{Binding Receiver.Count, StringFormat=총 수신: {0}건}"
+                               Margin="0,8,0,0" Foreground="Gray"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <TextBlock Grid.Row="2" Foreground="Gray" FontSize="11" TextWrapping="Wrap"
+                   Margin="0,10,0,0"
+                   Text="두 ViewModel은 서로를 직접 참조하지 않습니다. Messenger(중재자)가 약한 참조로 등록된 수신자에게만 메시지를 전달합니다. WeakReference 덕분에 구독자가 더 이상 사용되지 않으면 가비지 컬렉션되고 등록도 자동으로 정리됩니다."/>
+    </Grid>
+</Window>

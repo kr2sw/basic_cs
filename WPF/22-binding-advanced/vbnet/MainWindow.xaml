@@ -1,0 +1,106 @@
+<Window x:Class="Ch22.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Ch22"
+        Title="22 - 고급 데이터 바인딩" Height="560" Width="680">
+    <Window.Resources>
+        <local:FullNameConverter x:Key="FullNameConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="고급 데이터 바인딩: MultiBinding / PriorityBinding / UpdateSourceTrigger"
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+
+        <!-- 1) MultiBinding + 컨버터 -->
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" CornerRadius="6" Padding="12">
+            <StackPanel>
+                <TextBlock Text="1. MultiBinding + IMultiValueConverter" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <TextBox Text="{Binding Person.LastName, UpdateSourceTrigger=PropertyChanged}"
+                             Width="140" Margin="0,0,6,0" Padding="4"/>
+                    <TextBox Text="{Binding Person.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                             Width="140" Padding="4"/>
+                </StackPanel>
+                <TextBlock Margin="0,8,0,0" FontSize="14">
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource FullNameConverter}"
+                                      StringFormat="전체 이름: {0}">
+                            <Binding Path="Person.LastName"/>
+                            <Binding Path="Person.FirstName"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Margin="0,4,0,0" Foreground="Gray" FontSize="11"
+                           Text="컨버터 없이 StringFormat만으로도 조합이 가능합니다."/>
+            </StackPanel>
+        </Border>
+
+        <!-- 2) PriorityBinding -->
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,10,0,0">
+            <StackPanel>
+                <TextBlock Text="2. PriorityBinding (빠른 값 → 느린 값 → 기본값)" FontWeight="Bold"/>
+                <TextBlock Margin="0,8,0,0" FontSize="14">
+                    <TextBlock.Text>
+                        <PriorityBinding>
+                            <Binding Path="Person.NicknameFast"/>
+                            <Binding Path="Person.NicknameSlow"/>
+                            <Binding Path="Person.NicknameFallback"/>
+                        </PriorityBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Margin="0,4,0,0" Foreground="Gray" FontSize="11"
+                           Text="위쪽 바인딩부터 값을 가진 쪽이 표시됩니다. 1초 후 빠른 값, 3초 후 느린 값이 로드됩니다."/>
+            </StackPanel>
+        </Border>
+
+        <!-- 3) UpdateSourceTrigger = Explicit -->
+        <Border Grid.Row="3" BorderBrush="Gray" BorderThickness="1" CornerRadius="6" Padding="12" Margin="0,10,0,0">
+            <StackPanel>
+                <TextBlock Text="3. UpdateSourceTrigger = Explicit" FontWeight="Bold"/>
+                <TextBox x:Name="noteBox" Text="{Binding Person.Note, UpdateSourceTrigger=Explicit}"
+                         Margin="0,8,0,0" Padding="4" MinHeight="50" AcceptsReturn="True"
+                         TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                    <Button Content="명시적으로 소스에 반영" Click="CommitNote_Click"
+                            Padding="12,6" Margin="0,0,8,0"/>
+                    <TextBlock Text="{Binding Person.Note, StringFormat=저장된 메모: {0}}"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <TextBlock Grid.Row="4" Margin="0,12,0,0" FontWeight="Bold" Text="4. UpdateSourceTrigger 비교"/>
+        <Grid Grid.Row="5" Margin="0,6,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" Padding="8">
+                <TextBlock Text="{Binding Person.FirstName, StringFormat=PropertyChanged(즉시): {0}, UpdateSourceTrigger=PropertyChanged}"
+                           TextWrapping="Wrap"/>
+            </Border>
+            <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1" Padding="8" Margin="8,0">
+                <TextBlock Text="{Binding Person.LastName, StringFormat=LostFocus(포커스 이동): {0}, UpdateSourceTrigger=LostFocus}"
+                           TextWrapping="Wrap"/>
+            </Border>
+            <Border Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" Padding="8">
+                <TextBlock Text="{Binding Person.Note, StringFormat=Explicit(버튼 클릭): {0}, UpdateSourceTrigger=Explicit}"
+                           TextWrapping="Wrap"/>
+            </Border>
+        </Grid>
+
+        <TextBlock Grid.Row="6" Foreground="Gray" FontSize="11" TextWrapping="Wrap" VerticalAlignment="Bottom"
+                   Text="성능이 중요한 목록에서는 UpdateSourceTrigger=PropertyChanged를, 무거운 검증은 LostFocus나 Explicit을 사용합니다."/>
+    </Grid>
+</Window>

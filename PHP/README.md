@@ -1,6 +1,6 @@
-# PHP 기초 강의 (20개 챕터)
+# PHP 강의 (40개 챕터)
 
-PHP 프로그래밍 언어의 기초부터 고급 개념까지 학습할 수 있는 예제 모음입니다.
+PHP 프로그래밍 언어의 기초(00-20)와 중급(21-40) 과정으로 구성된 예제 모음입니다.
 
 ## 역사
 
@@ -46,3 +46,23 @@ cd PHP/01-hello-world && php index.php
 | 18 | File Upload | 파일 업로드, 다중 업로드, MIME 검사 |
 | 19 | Namespaces | 네임스페이스, use, autoload, Composer |
 | 20 | MVC Pattern | 간단한 MVC 패턴, 라우팅, 컨트롤러 |
+| 21 | Advanced OOP | 트레이트, 익명 클래스, 매직 메서드, 객체 복사 |
+| 22 | Design Patterns | 싱글턴, 팩토리, 전략, 옵저버, 의존성 주입 |
+| 23 | PSR & Composer | autoload, PSR-4, 버전 제약, 시맨틱 버저닝 |
+| 24 | Advanced PDO | 트랜잭션, prepared statement, Repository 패턴 |
+| 25 | Doctrine ORM | 엔티티 매핑, 영속성 컨텍스트, UnitOfWork (시뮬레이션) |
+| 26 | Symfony Components | 라우터, Console 컴포넌트 개념 |
+| 27 | Laravel Basics | 설치, 라우팅, 컨트롤러, 블레이드 개념 |
+| 28 | Eloquent ORM | 모델, 접근자/뮤테이터, 관계(1:N, N:M) |
+| 29 | Auth | 세션 인증, Sanctum 토큰, JWT 개념 |
+| 30 | REST API | 엔드포인트 설계, 상태 코드, 버저닝 |
+| 31 | Testing | PHPUnit 스타일 어설션, 미니 테스트 러너 |
+| 32 | Security | password_hash, CSRF, XSS, SQL 인젝션 방어 |
+| 33 | Caching | OPcache, 파일 캐시, Redis 개념 |
+| 34 | Queues & Jobs | 작업 큐 패턴, 워커, 재시도/백오프 |
+| 35 | WebSocket | Ratchet 개념, 핸드셰이크, 채팅 구조 |
+| 36 | Performance | 벤치마크, 지연 로딩, 프로파일링 |
+| 37 | Deployment | Docker, Nginx + PHP-FPM, 환경 변수 |
+| 38 | GraphQL | 스키마, 쿼리/리졸버 개념 |
+| 39 | SOLID | 단일 책임, 개방-폐쇄 등 5원칙 |
+| 40 | Final Project | CLI 기반 작업 관리 앱 |

@@ -49,3 +49,23 @@ npx http-server .
 | 18 | Debugging | Chrome DevTools, wasm-objdump, 소스맵 |
 | 19 | WASI | WebAssembly System Interface, Wasmtime |
 | 20 | Real-world Project | 이미지 필터 (grayscale/invert/threshold) |
+| 21 | Tables & Indirect | table, elem, call_indirect, 함수 포인터 |
+| 22 | Bulk Memory | memory.copy/fill, 수동 데이터 세그먼트 |
+| 23 | Reference Types | externref, funcref, ref.null |
+| 24 | SIMD | v128, 128비트 벡터 연산, 정수/부동소수 |
+| 25 | Multi-value | 다중값 반환, 다중 메모리 |
+| 26 | Exception Handling | try/catch, throw, tag |
+| 27 | Threads | shared memory, atomic 연산, worker |
+| 28 | Advanced JS Interop | 공유 메모리, 객체 변환, 성능 패턴 |
+| 29 | Emscripten FS | FS, IDBFS, MEMFS |
+| 30 | Emscripten Advanced | pthreads, Optimize 플래그 |
+| 31 | Rust + WASM Advanced | wasm-bindgen, 파서 성능 |
+| 32 | AssemblyScript Advanced | 메모리 관리, 라이브러리 |
+| 33 | Wasmtime/WASI Advanced | CLI, 리소스 제한 |
+| 34 | Component Model | wit, 인터페이스, 합성 |
+| 35 | Edge Runtime | Cloudflare Workers, 모듈 연동 |
+| 36 | Plugins & Sandbox | Extism, Wasmer, 보안 격리 |
+| 37 | Performance | 벤치마킹, 크기 최적화, 메모리 튜닝 |
+| 38 | Advanced Debugging | DWARF, 소스맵, Chrome DevTools |
+| 39 | Security | 검증, CSP, 메모리 안전 |
+| 40 | Final Project | 이미지 필터/계산기 앱 |

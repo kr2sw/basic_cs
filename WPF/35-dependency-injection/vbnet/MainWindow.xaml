@@ -1,0 +1,33 @@
+<Window x:Class="Ch35.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="35 - 의존성 주입 (DI)" Height="320" Width="500">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="직접 만든 미니 DI 컨테이너"
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="180"
+                     Padding="6,4"/>
+            <Button Content="인사" Command="{Binding GreetCommand}" Padding="16,7" Margin="10,0,0,0"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="2" Text="{Binding Greeting}" FontSize="16" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,20,0,0" Foreground="SteelBlue"/>
+
+        <TextBlock Grid.Row="3" Text="{Binding ProviderInfo}" HorizontalAlignment="Center"
+                   Margin="0,8,0,0" Foreground="Gray" FontSize="11"/>
+
+        <TextBlock Grid.Row="4" Foreground="Gray" FontSize="11" TextWrapping="Wrap"
+                   VerticalAlignment="Bottom"
+                   Text="ServiceCollection에 Singleton/Transient로 등록하고, ServiceProvider가 생성자를 분석해 의존성을 자동 주입합니다. 실제 앱에서는 Microsoft.Extensions.DependencyInjection(또는 Host)을 쓰지만, 이 예제는 DI의 동작 원리를 순수 BCL로 재현합니다."/>
+    </Grid>
+</Window>

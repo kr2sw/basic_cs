@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 고급 디버깅</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>고급 디버깅 데모</h1>
+  <p>
+    DevTools(F12)를 열고 <b>Sources → Page → debug.wasm</b>에서<br>
+    <code>factorial</code> 함수에 중단점을 걸고 이 버튼을 누른 뒤 스코프를 확인하세요.
+  </p>
+  <button onclick="runFact()">factorial(5)</button>
+  <button onclick="runDiv()">unsafeDiv(10, 0) — 트랩</button>
+  <button onclick="runAvg()">avgOfThree(10, 20, 30)</button>
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById('out');
+    const print = (m) => {
+      out.textContent = (out.textContent ? out.textContent + '\n' : '') + m;
+    };
+    let exports = null;
+
+    async function init() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('debug.wasm'));
+      exports = instance.exports;
+      print('로드 완료. 빌드 시 --debug-names 플래그를 쓰면 이름이 남습니다.');
+    }
+
+    function runFact() {
+      print(`factorial(5) = ${exports.factorial(5)}`);
+    }
+
+    function runDiv() {
+      try {
+        print(`unsafeDiv(10, 0) = ${exports.unsafeDiv(10, 0)}`);
+      } catch (e) {
+        print(`트랩 발생: ${e.message} (스택 추적 확인)`);
+      }
+    }
+
+    function runAvg() {
+      print(`avgOfThree(10, 20, 30) = ${exports.avgOfThree(10, 20, 30)}`);
+    }
+
+    window.runFact = runFact;
+    window.runDiv = runDiv;
+    window.runAvg = runAvg;
+
+    init().catch(console.error);
+  </script>
+</body>
+</html>

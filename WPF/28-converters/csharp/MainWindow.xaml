@@ -1,0 +1,65 @@
+<Window x:Class="Ch28.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Ch28"
+        Title="28 - 컨버터 (IValueConverter)" Height="400" Width="560">
+    <Window.Resources>
+        <local:BooleanToBrushConverter x:Key="BooleanToBrush"/>
+        <local:NullToVisibilityConverter x:Key="NullToVisibility"/>
+        <local:RangeWarningConverter x:Key="RangeWarning"/>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="IValueConverter / IMultiValueConverter"
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+
+        <!-- 1. BooleanToBrushConverter: ConverterParameter로 색상 주입 -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <CheckBox Content="활성 상태" IsChecked="{Binding Active}" VerticalAlignment="Center"/>
+            <TextBlock x:Name="activeStatus" Text="상태 표시" Margin="16,0,0,0" FontWeight="Bold"
+                       Foreground="{Binding Active, Converter={StaticResource BooleanToBrush},
+                                              ConverterParameter=#2E7D32,#C62828}"/>
+        </StackPanel>
+
+        <!-- 2. NullToVisibilityConverter: null 여부로 요소 표시/숨김 -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,16,0,0">
+            <TextBlock Text="가격:" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding Price, StringFormat={}{0:C}}" Margin="10,0,0,0"
+                       FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Text="가격 미정" Foreground="Gray" Margin="10,0,0,0"
+                       VerticalAlignment="Center"
+                       Visibility="{Binding Price, Converter={StaticResource NullToVisibility},
+                                             ConverterParameter=true}"/>
+        </StackPanel>
+
+        <!-- 3. IMultiValueConverter: 점수, 최소, 최대를 조합해 경고 표시 -->
+        <StackPanel Grid.Row="3" Margin="0,16,0,0">
+            <TextBlock Text="점수" FontWeight="Bold"/>
+            <Slider Minimum="0" Maximum="100" Value="{Binding Score}"/>
+        </StackPanel>
+        <TextBlock Grid.Row="4" Text="점수가 0~100 범위를 벗어났습니다." Foreground="Red" FontWeight="Bold"
+                   Margin="0,6,0,0">
+            <TextBlock.Visibility>
+                <MultiBinding Converter="{StaticResource RangeWarning}">
+                    <Binding Path="Score"/>
+                    <Binding Path="Min"/>
+                    <Binding Path="Max"/>
+                </MultiBinding>
+            </TextBlock.Visibility>
+        </TextBlock>
+
+        <TextBlock Grid.Row="5" Foreground="Gray" FontSize="11" TextWrapping="Wrap"
+                   Margin="0,16,0,0"
+                   Text="컨버터는 뷰 모델 데이터를 뷰 전용 표현으로 바꾸는 도우미입니다. ConverterParameter로 전환 옵션을 외부에서 주입할 수 있고, IMultiValueConverter는 여러 값을 조합합니다. 양방향이 필요 없으면 ConvertBack에 예외를 던져 명시적으로 금지하세요."/>
+    </Grid>
+</Window>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>WASM 고급 이미지 필터</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; }
+    .controls { margin: 12px 0; }
+    button { margin: 4px; padding: 8px 16px; cursor: pointer; }
+    label { margin-right: 12px; }
+    canvas { border: 1px solid #ccc; max-width: 100%; }
+    .row { margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <h1>실전 프로젝트: 고급 이미지 필터</h1>
+  <input type="file" id="fileInput" accept="image/*">
+  <div class="controls">
+    <button onclick="applyFilter('grayscale')">그레이스케일</button>
+    <button onclick="applyFilter('sepia')">세피아</button>
+    <button onclick="applyFilter('brightness')">밝게</button>
+    <button onclick="applyFilter('contrast')">대비</button>
+    <button onclick="applyFilter('blur')">블러</button>
+    <button onclick="applyFilter('edge')">엣지 검출</button>
+    <button onclick="resetImage()">원본</button>
+  </div>
+  <div class="row">
+    <label>밝기/대비 정도 <input type="range" id="delta" min="-100" max="100" value="30"></label>
+    <label>블러 반경 <input type="range" id="blurR" min="1" max="5" value="2"></label>
+    <label>엣지 임계값 <input type="range" id="thr" min="10" max="200" value="60"></label>
+  </div>
+  <div class="row"><span id="status"></span></div>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const statusEl = document.getElementById('status');
+    let originalData = null;
+    let exports = null;
+
+    async function initWasm() {
+      const { instance } = await WebAssembly.instantiateStreaming(fetch('filter.wasm'));
+      exports = instance.exports;
+      statusEl.textContent = 'WASM 로드 완료. 이미지를 선택하세요.';
+    }
+
+    document.getElementById('fileInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const img = new Image();
+      img.onload = () => {
+        // 성능을 위해 최대 640x480으로 축소
+        const scale = Math.min(1, 640 / img.width, 480 / img.height);
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        originalData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      };
+      img.src = URL.createObjectURL(file);
+    });
+
+    function copyToWasm(imageData) {
+      const mem = exports.memory;
+      const view = new Uint8Array(mem.buffer);
+      view.set(imageData.data, 0);
+    }
+
+    function copyFromWasm(imageData) {
+      const mem = exports.memory;
+      const view = new Uint8Array(mem.buffer);
+      imageData.data.set(view.subarray(0, imageData.data.length));
+    }
+
+    function applyFilter(type) {
+      if (!exports || !originalData) return;
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const count = imageData.data.length;      // 바이트 수
+      const pixels = count / 4;
+
+      copyToWasm(imageData);
+
+      const t0 = performance.now();
+      switch (type) {
+        case 'grayscale': exports.grayscale(0, pixels); break;
+        case 'sepia':     exports.sepia(0, pixels); break;
+        case 'brightness': exports.brightness(0, pixels, parseInt(document.getElementById('delta').value)); break;
+        case 'contrast':  exports.contrast(0, pixels, 100 + parseInt(document.getElementById('delta').value)); break;
+        case 'blur':      exports.boxBlur(0, canvas.width, canvas.height, parseInt(document.getElementById('blurR').value)); break;
+        case 'edge':      exports.edgeDetect(0, canvas.width, canvas.height, parseInt(document.getElementById('thr').value)); break;
+      }
+      const ms = performance.now() - t0;
+
+      copyFromWasm(imageData);
+      ctx.putImageData(imageData, 0, 0);
+      statusEl.textContent = `${type} 처리 완료: ${ms.toFixed(1)}ms (${pixels.toLocaleString()}픽셀)`;
+    }
+
+    function resetImage() {
+      if (!originalData) return;
+      ctx.putImageData(originalData, 0, 0);
+    }
+
+    initWasm().catch(console.error);
+  </script>
+</body>
+</html>
